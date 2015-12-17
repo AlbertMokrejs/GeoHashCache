@@ -1,0 +1,2 @@
+# GeoHashCache
+Geohashing Augmented Geocaching
