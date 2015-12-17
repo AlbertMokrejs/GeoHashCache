@@ -1,13 +1,14 @@
 # GeoHashCache
 Geohashing Augmented Geocaching
 
+## Contributors' Information:
+
 |                                       |   **Member**   |                   **GitHub**                 |            **Role**            |
 |---------------------------------------|:--------------:|:--------------------------------------------:|:------------------------------:|
 | <img src="images/shawn.jpg" width="100" height="100" /> | Shawn Li   |[`@boao987`](https://github.com/TyranitarShawn)        | Frontend  |
 | <img src="images/samuel.jpg" width="100" height="100" /> | Samuel Zhang |[`@CodeSammich`](https://github.com/CodeSammich)    | Middleware  |
 | <img src="images/albert.jpg" width="100" height="100" /> | Albert Mokrejs    |[`@AlbertMokrejs`](https://github.com/AlbertMokrejs)| Backend - API Handler |
 
-=======
 ## General Proposal:
 Geocaching usually refers to the internet "sport" of venturing out into the world in search of objects (called "Caches") hidden by other geogachers. The clues to finding these are usually a set of vague GPS coordinates as well as some sort of riddle, puzzle, map or challenge. These can vary from finding a particular tree to look under, to hacking a simulated wifi-network to get the actual set of coordinates. However, there's a finite number of unmoving caches in traditional geocaching, which means dedicated geocachers can potentially find *every* cache in their area which would leave them with nothing to do.
 
