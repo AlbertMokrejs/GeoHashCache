@@ -1,7 +1,6 @@
 # GeoHashCache
 Geohashing Augmented Geocaching
 
-<<<<<<< HEAD
 |                                       |   **Member**   |                   **GitHub**                 |            **Role**            |
 |---------------------------------------|:--------------:|:--------------------------------------------:|:------------------------------:|
 | <img src="images/shawn.jpg" width="100" height="100" /> | Shawn Li   |[`@boao987`](https://github.com/TyranitarShawn)        | Frontend  |
@@ -33,11 +32,3 @@ Therefore, we propose a geohash-augmented form of geocaching. Geohashing uses a 
   * Lost or Damaged caches will not show up on map results until they are repaired.
 * Users will have individual accounts used for commenting that will allow them to track which caches they have found, or what caches they have created.
 
-#
-
-| | Name | Job | Github |
-| ------------- | ------------- | ------------- | ------------- |
-| |Shawn Li | Front-End, Middle Ware | [Link](https://github.com/TyranitarShawn) |
-| | Albert Mokrejs | Back End | [Link](https://github.com/AlbertMokrejs) |
-| | Samuel Zhang | Middle Ware | [Link](https://github.com/codesammich) | 
->>>>>>> d3c155b9e0cab8792784ceaf570c161d125bb994
