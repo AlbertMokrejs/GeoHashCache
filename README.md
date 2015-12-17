@@ -23,6 +23,7 @@ Therefore, we propose a geohash-augmented form of geocaching. Geohashing uses a 
 * A NoSQL database will be used to to keep track of caches, users, and comments. 
 * Caches will each have a public and a secret ID. The public ID will be used as the cache's webpage link, while the private ID will be used to validate (or prove) that a user has found a cache. 
   * QR codes will contain both IDs, making it possible to log a cache quickly using a QR code scanner.
+  * They will be generated with the http://goqr.me/api/ API
 * BitAverage's Bitcoin-Tracker-API, the current date, and the user's location will be used to GeoHash new coordinates for caches that have been found. 
   * A MD5 hash will act as the actual hash, and coordinates will be limited to a certain degree of precision.
     * Limiting the precision serves to limit the issues with inaccuracy that most GPS have.
