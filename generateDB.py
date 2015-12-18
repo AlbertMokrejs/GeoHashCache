@@ -36,36 +36,34 @@ def generateGhcDB():
          curs.execute(q)
          connect.commit()
 
-def GreatestStoryID():
-    conn = sqlite3.connect("StoryBase.db")
+def greatestCacheID():
+    conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q="""SELECT * FROM Stories;
+    q="""SELECT * FROM caches;
     	"""
     result = c.execute(q)
     x = 0
     for r in result:
-        if r[3] > x:
-            x = r[3]
+        if r[5] > x:
+            x = r[5]
+    return x
+    
+def lowestCommentID():
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q="""SELECT * FROM caches;
+    	"""
+    result = c.execute(q)
+    x = -1
+    for r in result:
+        if r[1] < x:
+            x = r[1]
     return x
 
-def register(username,password):
+def register(username,password,uid):
     conn = sqlite3.connect("StoryBase.db")
     c = conn.cursor()
-    q = """insert into Login values ('%s','%s');""" % (username,password)
-    c.execute(q)
-    conn.commit()
-    
-def comment(storyID, CContent, Date):
-    conn = sqlite3.connect("StoryBase.db")
-    c = conn.cursor()
-    q = """insert into comments values ('%s','%s','%s');""" % (storyID, CContent, Date)
-    c.execute(q)
-    conn.commit()
-    
-def addStory(Content, Name, Username, ID, Date):
-    conn = sqlite3.connect("StoryBase.db")
-    c = conn.cursor()
-    q = """insert into Stories values ('%s','%s','%s','%s','%s');""" % (Content,Name,Username,ID,Date)
+    q = """insert into login values ('%s','%s','%s');""" % (username,password,uid)
     c.execute(q)
     conn.commit()
 
