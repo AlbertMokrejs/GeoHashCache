@@ -14,6 +14,8 @@ Geocaching usually refers to the internet "sport" of venturing out into the worl
 
 Therefore, we propose a geohash-augmented form of geocaching. Geohashing uses a combination of inputs including GPS coordinates, the date, the daily stock market stats and other data to generate new GPS coordinates. These coordinates can be confined to a certain range or area. Our idea is to make use of a Geohash to generate new coordinates for a cache once it is found. When a geocacher finds a geohashcash, the website generates a new coordinate in their area for them to relocate the cache to. They can produce a new riddle of challenge for the cache when they do this, and it gets updated. This would allow for geocachers who live in areas with very few caches to still keep finding caches because the caches are moved everytime someone finds one. The same cache could be on the empire state building today and end up in a pizzaria in tribeca tomorrow. 
 
+A preliminary GeoHash can be found in geohash.py in this repository. It uses the BTC API used in the technical proposal. It will be updated to be more robust and random once the project is approved.
+
 ## Additional Sub-Proposal:
 * We'd like to include the option to generate QR codes for caches, allowing for users to indicate they've found a cache using a QR code scanner. 
 * We'd like to include googlemaps integration to show caches in your area, which would update as they move.
