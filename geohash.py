@@ -1,6 +1,3 @@
-# go to 5 decimal places
-# lat -90/90, long -180/180
-
 import hashlib
 import urllib2 
 import time
@@ -36,11 +33,11 @@ def coordGen (lat, lon, smallBool):
     print longer
     
     if smallBool:
+        lat = lat - lat% 0.001
+        lon = lon - lon% 0.001
+    else:
         lat = lat - lat% 0.01
         lon = lon - lon% 0.01
-    else:
-        lat = lat - lat% 0.1
-        lon = lon - lon% 0.1
     
     lat = float(str(lat) + str(shorter)) 
     lon = float(str(lon) + str(longer))
@@ -49,7 +46,7 @@ def coordGen (lat, lon, smallBool):
     
     print lat 
     print lon 
-    return [lat, lon]
+    return [float(str(lat)[0:8]),float(str(lon)[0:8])]
     
 print geoHash(40.7245678,-73.8457658,True)
 print geoHash(40.7245678,-73.8457658,False)
