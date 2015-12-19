@@ -20,12 +20,13 @@ def checkGenerate():
       Validid REAL,
       Founder TEXT,
       Date TEXT,
+      Status REAL
    );""","""CREATE TABLE comments(
       Parentid REAL,
       Commentid REAL,
       Content TEXT,
       Date TEXT,
-      Author TEXT,
+      Author TEXT
    );
    """,
    """CREATE TABLE cacheIDs(
