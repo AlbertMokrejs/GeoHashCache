@@ -60,3 +60,11 @@ def makeComment(Parentid, Content, Author):
     Commentid = lowestCommentID() - 1
     Date = time.strftime("%d-%m-%Y)
     comment(Parentid, Commentid, Content, Date, Author)
+    
+def makeQR(cacheID):
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q = """SELECT * FROM cacheIDs WHERE Cacheid = '%s'""" % (cacheID)
+    result = c.execute(q)
+    for r in result:
+        return "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=validateCache/" + cacheID + "/" + r[1]
