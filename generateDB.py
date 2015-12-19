@@ -1,8 +1,14 @@
 import sqlite3, os.path
 
+#Checks if there is a database. Makes one if there isn't.
+#
+#
 def checkGenerate():
+   #Checks if there is a database file.
    x = os.path.isfile("GeoHashCache.db")
+   
    if not x:
+      #Makes tables.
       connect = sqlite3.connect("GeoHashCache.db")
       curs = connect.cursor()
       List = ["""
@@ -37,24 +43,30 @@ def checkGenerate():
          curs.execute(q)
          connect.commit()
 
+#Finds the ID of the latest Cache as IDs are sequential. 
 def greatestCacheID():
+    #Gets all caches.
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q="""SELECT * FROM caches;
     	"""
     result = c.execute(q)
+    #Loops through all IDs to find the greatest, starting at 0.
     x = 0
     for r in result:
         if r[5] > x:
             x = r[5]
     return x
-    
+
+#Finds the ID of the latest comment.
 def lowestCommentID():
+    #Gets all comments.
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q="""SELECT * FROM comments;
     	"""
     result = c.execute(q)
+    #Loops through all IDs to find the lowest, starting at -1.
     x = -1
     for r in result:
         if r[1] < x:
