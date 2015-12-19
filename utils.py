@@ -25,4 +25,14 @@ def updateCache(cacheID, lat, lon, Type, name, desc, stat):
     Description = '%s', Status = '%s'
     WHERE Cacheid = '%s';""" % (lat, lon, Type, name, desc, stat, cacheID)
     c.execute(q)
+    
+def genNewCoord(cacheID,small):
+    c = conn.cursor()
+    q = """
+    SELECT Latitude, Longitude
+    FROM caches
+    WHERE caches.Cacheid = '%s'
+    """ % (cacheID)
+    result = c.execute(q)
+    return geoHash(result[0],result[1],small)
 
