@@ -1,0 +1,16 @@
+import sqlite3
+
+def authenticate(username,password):
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q = """
+    SELECT Username, Password
+    FROM logins
+    WHERE logins.Username = '%s'
+    """ % (username)
+    result = c.execute(q)
+    for r in result:
+        if r[1] == password:
+            return [True, r[2]]
+    return [False, -1]
+
