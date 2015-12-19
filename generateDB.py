@@ -1,6 +1,6 @@
 import sqlite3, os.path
 
-def generateGhcDB():
+def checkGenerate():
    x = os.path.isfile("GeoHashCache.db")
    if not x:
       connect = sqlite3.connect("GeoHashCache.db")
@@ -51,7 +51,7 @@ def greatestCacheID():
 def lowestCommentID():
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q="""SELECT * FROM caches;
+    q="""SELECT * FROM comments;
     	"""
     result = c.execute(q)
     x = -1
@@ -66,4 +66,24 @@ def register(username,password,uid):
     q = """insert into login values ('%s','%s','%s');""" % (username,password,uid)
     c.execute(q)
     conn.commit()
+    
+def createCache(Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date):
+    conn = sqlite3.connect("StoryBase.db")
+    c = conn.cursor()
+    q = """insert into caches values ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s');""" % (Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date, 0)
+    c.execute(q)
+    conn.commit()
+    q = """insert into cacheIDs value ('%s','%s');""" % (Cacheid, Validid)
+    c.execute(q)
+    conn.commit
+    
+def comment(Parentid, Commentid, Content, Date, Author):
+    conn = sqlite3.connect("StoryBase.db")
+    c = conn.cursor()
+    q = """insert into comments values ('%s','%s','%s','%s','%s');""" % (Parentid, Commentid, Content, Date, Author)
+    c.execute(q)
+    conn.commit()
+
+
+
 
