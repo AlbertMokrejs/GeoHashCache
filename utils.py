@@ -29,6 +29,7 @@ def updateCache(cacheID, lat, lon, Type, name, desc, stat):
     c.execute(q)
     
 def genNewCoord(cacheID,small):
+    conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q = """
     SELECT Latitude, Longitude
@@ -37,4 +38,19 @@ def genNewCoord(cacheID,small):
     """ % (cacheID)
     result = c.execute(q)
     return geoHash(result[0],result[1],small)
+    
+def validateCache(cacheID, passcode):
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q = """SELECT * FROM cacheIDs WHERE Cacheid = '%s'""" % (cacheID)
+    result = c.execute(q)
+    for r in result:
+        if r[1] == passcode:
+            return True
+    return False
+    
+#def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
+    
+
+
 
