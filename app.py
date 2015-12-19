@@ -17,25 +17,12 @@ def home():
 
 @app.route("/moveCache/<cacheID>")
 def moveCache(cacheID = 0):
-  c = conn.cursor()
-  q = """
-    SELECT Latitude, Longitude
-    FROM caches
-    WHERE caches.Cacheid = '%s'
-    """ % (cacheID)
-  result = c.execute(q)
-  return geoHash(result[0],result[1],False)
+	return genNewCoord(cacheID, False)
+  
 
 @app.route("/closeMoveCache/<cacheID>")
 def moveCache(cacheID = 0):
-  c = conn.cursor()
-  q = """
-    SELECT Latitude, Longitude
-    FROM caches
-    WHERE caches.Cacheid = '%s'
-    """ % (cacheID)
-  result = c.execute(q)
-  return geoHash(result[0],result[1],True)
+	return genNewCoord(cacheID, True)
 
 if (__name__ == "__main__"):
         app.debug = True
