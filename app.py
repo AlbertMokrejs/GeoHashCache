@@ -6,7 +6,7 @@ import generateDB
 import utils
 import geohash
 
-checkGenerate()
+GenerateDB.checkGenerate()
 
 ##
 
