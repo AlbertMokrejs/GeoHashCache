@@ -68,11 +68,11 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
+		  {% block row %}
                     <div class="col-lg-12">
-		      {% block col-lg-12 %}
-                      {% endblock %}
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                     </div>
+		  {% endblock %}
                 </div>
             </div>
         </div>
