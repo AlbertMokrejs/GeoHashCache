@@ -6,6 +6,11 @@ GeoHashCache - Login
 {% endblock %}
 
 {% block row %}
+
+{if error %}
+<center><h3>{{err}}</h3></center><br><br>
+{% endif %}
+
 <form class="form-container" method="POST">
 <div class="form-title"><h2>Register</h2></div>
 <div class="form-title">Username :</div>
@@ -16,4 +21,5 @@ GeoHashCache - Login
 <input class="submit-button" name="button" type="submit" value="Submit" />
 </div>
 </form>
+
 {% endblock %}
