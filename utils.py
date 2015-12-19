@@ -1,4 +1,5 @@
 import sqlite3
+import geohash
 
 def authenticate(username,password):
     conn = sqlite3.connect("GeoHashCache.db")
