@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-GeoHashCache - Login
+GeoHashCache - Register
 {% endblock %}
 
 {% block row %}
@@ -12,13 +12,15 @@ GeoHashCache - Login
 {% endif %}
 
 <form class="form-container" method="POST">
-<div class="form-title"><h2>Login</h2></div>
+<div class="form-title"><h2>Register</h2></div>
 <div class="form-title">Username :</div>
 <input class="form-field" type="text" name="username" placeholder="username" required/><br />
 <div class="form-title">Password :</div>
 <input class="form-field" type="text" name="password" placeholder="password" required/><br />
+<div class="form-title">Confirm Password :</div>
+<input class="form-field" type="text" name="confirm" placeholder="confirm" required/><br />
 <div class="submit-container">
-<input class="submit-button" name="button" type="submit" value="Login" />
+<input class="submit-button" name="button" type="submit" value="Submit" />
 </div>
 </form>
 
