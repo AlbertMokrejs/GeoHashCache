@@ -6,7 +6,7 @@ def authenticate(username,password):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q = """
-    SELECT Username, Password
+    SELECT *
     FROM logins
     WHERE logins.Username = '%s'
     """ % (username)
