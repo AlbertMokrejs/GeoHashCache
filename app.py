@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 def home():
-	if session["user"] and session["user"] != "":
+	if "user" in session.keys():
 		return render_template("home.html", Username = session["user"])
 	return render_template("home.html")
 	
