@@ -12,7 +12,7 @@ def checkGenerate():
       connect = sqlite3.connect("GeoHashCache.db")
       curs = connect.cursor()
       List = ["""
-   CREATE TABLE logins(
+   CREATE TABLE login(
       Username TEXT,
       Password TEXT,
       Uid REAL
