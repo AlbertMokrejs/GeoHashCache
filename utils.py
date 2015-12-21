@@ -7,8 +7,8 @@ def authenticate(username,password):
     c = conn.cursor()
     q = """
     SELECT *
-    FROM logins
-    WHERE logins.Username = '%s'
+    FROM login
+    WHERE login.Username = '%s'
     """ % (username)
     result = c.execute(q)
     for r in result:
