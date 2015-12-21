@@ -42,12 +42,18 @@
                         GeoHashCache
                     </a>
                 </li>
+		{% if Username %}
+		<li>
+		  <a href="#">{{Username}}</a>
+		</li>
+		{% else %}
                 <li>
                     <a href="login">Login</a>
                 </li>
                 <li>
                     <a href="register">Register</a>
                 </li>
+		{% endif %}
                 <li>
                     <a href="#">Found a Cache</a>
                 </li>
