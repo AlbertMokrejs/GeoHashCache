@@ -55,6 +55,9 @@ def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
     hashed = hashlib.sha224(str(cacheID) + Date).hexdigest()
     validID = str(int(hashed,16))[0:10]
     createCache(Latitude, Longitude, Type, Name, Description, cacheID, validID, Founder, Date)
+    
+def register(Uname,Pword):
+    createUser(Uname,Pword,greatestUserID() + 1)
 
 def makeComment(Parentid, Content, Author):
     Commentid = lowestCommentID() - 1
