@@ -42,7 +42,7 @@ def registerPage():
         	uname = request.form['username']
         	pword = request.form['password']
         	if pword == request.form["confirm"]:
-        		register(uname,pword)
+        		utils.register(uname,pword)
         		session["user"] = uname
         		return redirect("/home")
         	else:
