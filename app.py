@@ -17,6 +17,37 @@ app = Flask(__name__)
 def home():
 	return render_template("home.html")
 	
+@app.route("/login",methods=["GET","POST"])
+def login():
+	if request.method=="GET":
+        	return render_template("login.html")
+        else:
+        	uname = request.form['username']
+        	pword = request.form['password']
+        	if authenticate(uname,pword):
+        		session["user"] = uname
+        		return render_template("home.html")
+        	else:
+            		session["user"] = ""
+            		error = "Bad username or password"
+            		return render_template("login.html",error=error)
+
+@app.route("/register",methods=["GET","POST"])
+def registerPage():
+	if request.method=="GET":
+        	return render_template("register.html")
+        else:
+        	uname = request.form['username']
+        	pword = request.form['password']
+        	if pword = request.form["confirm"]:
+        		register(uname,pword)
+        		session["user"] = uname
+        		return render_template("home.html")
+        	else:
+            		session["user"] = ""
+            		error = "Passwords do not match"
+            		return render_template("register.html",error=error)
+	
 ##
 
 @app.route("/moveCache/<cacheID>")
