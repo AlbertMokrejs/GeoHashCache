@@ -29,6 +29,10 @@ def login():
         	if utils.authenticate(uname,pword)[0]:
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
+        		if session["redir"] and session["redir"] != "":
+        			redir = session["redir"]
+        			session["redir" = ""
+        			return redirect(redir)
         		return redirect("/home")
         	else:
             		session["user"] = ""
@@ -47,8 +51,10 @@ def registerPage():
         		utils.register(uname,pword)
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
-        		if session["redir"]:
-        			return 
+        		if session["redir"] and session["redir"] != "":
+        			redir = session["redir"]
+        			session["redir" = ""
+        			return redirect(redir)
         		return redirect("/home")
         	else:
             		session["user"] = ""
@@ -69,7 +75,15 @@ def foundCache():
 		if not (session["user"] and session["user"] != ""):
 			session["redir"] = "/found"
 			return redirect("/login")
-	makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
+	else:
+		Founder = request.form['username']
+		Latitude = request.form['Latitude']
+		Longitude = request.form['Longitude']
+		Type = request.form['Type']
+		Description = request.form['Desc']
+		Name = request.form["Name"]
+		newID = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
+		return redirect("/found", name = Name, IMG = utils.makeQR(newID))
 	
 ##
 
