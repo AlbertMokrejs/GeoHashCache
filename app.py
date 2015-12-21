@@ -92,9 +92,8 @@ def foundCache():
 def cacheProfile( uid = 0):
         return render_template( "cache.html", utils.getCache( uid ))
 	
-##
-##
-##
+## ------ app.py API code, accessed only by local file -------- ##
+
 
 @app.route("/moveCache/<cacheID>")
 def moveCache(cacheID = 0):
@@ -108,8 +107,6 @@ def moveCacheB(cacheID = 0):
 @app.route("/checkCache/<cacheID>/<validID>")
 def checkCache(cacheID = 0, validID = 0):
 	return validateCache(cacheID, validID)
-
-
         
 
 if (__name__ == "__main__"):
