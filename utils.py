@@ -58,6 +58,25 @@ def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
     
 def register(Uname,Pword):
     generateDB.createUser(Uname,Pword,generateDB.greatestUserID() + 1)
+    
+def getProfile(uid):
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q = """SELECT * FROM login WHERE Uid = '%s'""" % (uid)
+    result = c.execute(q)
+    for r in result:
+        return marshal.loads(r[3])
+
+def setProfile(uid,blob):
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q = """UPDATE login
+        SET Profile = '%s'
+        WHERE Uid = '%s'""" % (marshal.dumps(blob),uid)
+    c.execute(q)
+
+def appendProfile(uid,blob):
+    setProfile(uid, getProfile(uid) + blob)
 
 def Comment(Parentid, Content, Author):
     Commentid = lowestCommentID() - 1

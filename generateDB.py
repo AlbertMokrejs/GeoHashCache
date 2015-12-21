@@ -1,4 +1,5 @@
 import sqlite3, os.path
+import marshal
 
 #Checks if there is a database. Makes one if there isn't.
 #
@@ -16,6 +17,7 @@ def checkGenerate():
       Username TEXT,
       Password TEXT,
       Uid REAL
+      Profile BLOB
    );""","""CREATE TABLE caches(
       Latitude REAL, 
       Longitude REAL,
@@ -90,7 +92,7 @@ def greatestUserID():
 def createUser(username,password,uid):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q = """insert into login values ('%s','%s','%s');""" % (username,password,uid)
+    q = """insert into login values ('%s','%s','%s');""" % (username,password,uid,marshal.dumps([]))
     c.execute(q)
     conn.commit()
     
