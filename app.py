@@ -44,7 +44,7 @@ def registerPage():
         		session["user"] = uname
         		return render_template("home.html")
         	else:
-            		session["user"] = ""
+            		session["user"] == ""
             		error = "Passwords do not match"
             		return render_template("register.html",error=error)
 	
