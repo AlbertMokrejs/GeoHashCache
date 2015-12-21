@@ -39,12 +39,12 @@ def registerPage():
         else:
         	uname = request.form['username']
         	pword = request.form['password']
-        	if pword = request.form["confirm"]:
+        	if pword == request.form["confirm"]:
         		register(uname,pword)
         		session["user"] = uname
         		return render_template("home.html")
         	else:
-            		session["user"] == ""
+            		session["user"] = ""
             		error = "Passwords do not match"
             		return render_template("register.html",error=error)
 	
