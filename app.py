@@ -49,8 +49,16 @@ def registerPage():
             		session["user"] = ""
             		error = "Passwords do not match"
             		return render_template("register.html",error=error)
+
+
+@app.route("/logout")
+def home():
+	session["user"] = ""
+	return render_template("home.html")
 	
 ##
+
+
 
 @app.route("/moveCache/<cacheID>")
 def moveCache(cacheID = 0):
