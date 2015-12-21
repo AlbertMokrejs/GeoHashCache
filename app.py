@@ -31,7 +31,7 @@ def login():
         		session["uid"] = utils.authenticate(uname,pword)[1]
         		if session["redir"] and session["redir"] != "":
         			redir = session["redir"]
-        			session["redir" = ""
+        			session["redir"] = ""
         			return redirect(redir)
         		return redirect("/home")
         	else:
