@@ -15,6 +15,8 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 def home():
+	if session["user"] and session["user"] != "":
+		return render_template("home.html", Username = session["user"])
 	return render_template("home.html")
 	
 @app.route("/login",methods=["GET","POST"])
@@ -26,7 +28,7 @@ def login():
         	pword = request.form['password']
         	if authenticate(uname,pword):
         		session["user"] = uname
-        		return render_template("home.html")
+        		return redirect("/home")
         	else:
             		session["user"] = ""
             		error = "Bad username or password"
@@ -42,7 +44,7 @@ def registerPage():
         	if pword == request.form["confirm"]:
         		register(uname,pword)
         		session["user"] = uname
-        		return render_template("home.html")
+        		return redirect("/home")
         	else:
             		session["user"] = ""
             		error = "Passwords do not match"
