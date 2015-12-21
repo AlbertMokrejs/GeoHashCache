@@ -57,7 +57,7 @@ def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
     generateDB.createCache(Latitude, Longitude, Type, Name, Description, cacheID, validID, Founder, Date)
     
 def register(Uname,Pword):
-    generateDB.createUser(Uname,Pword,greatestUserID() + 1)
+    generateDB.createUser(Uname,Pword,generateDB.greatestUserID() + 1)
 
 def Comment(Parentid, Content, Author):
     Commentid = lowestCommentID() - 1
