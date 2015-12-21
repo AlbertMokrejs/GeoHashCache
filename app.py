@@ -26,7 +26,7 @@ def login():
         else:
         	uname = request.form['username']
         	pword = request.form['password']
-        	if authenticate(uname,pword):
+        	if utils.authenticate(uname,pword):
         		session["user"] = uname
         		return redirect("/home")
         	else:
