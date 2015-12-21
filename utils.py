@@ -59,7 +59,7 @@ def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
 def register(Uname,Pword):
     createUser(Uname,Pword,greatestUserID() + 1)
 
-def makeComment(Parentid, Content, Author):
+def Comment(Parentid, Content, Author):
     Commentid = lowestCommentID() - 1
     Date = time.strftime("%d-%m-%Y")
     comment(Parentid, Commentid, Content, Date, Author)
