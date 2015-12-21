@@ -87,7 +87,7 @@ def greatestUserID():
             x = r[2]
     return x
 
-def register(username,password,uid):
+def createUser(username,password,uid):
     conn = sqlite3.connect("StoryBase.db")
     c = conn.cursor()
     q = """insert into login values ('%s','%s','%s');""" % (username,password,uid)
