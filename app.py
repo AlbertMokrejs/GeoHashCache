@@ -52,7 +52,7 @@ def registerPage():
 
 
 @app.route("/logout")
-def home():
+def logout():
 	session["user"] = ""
 	return redirect("/home")
 	
