@@ -104,7 +104,7 @@ def createCache(Latitude, Longitude, Type, Name, Description, Cacheid, Validid, 
     c.execute(q)
     conn.commit
     
-def comment(Parentid, Commentid, Content, Date, Author):
+def createComment(Parentid, Commentid, Content, Date, Author):
     conn = sqlite3.connect("StoryBase.db")
     c = conn.cursor()
     q = """insert into comments values ('%s','%s','%s','%s','%s');""" % (Parentid, Commentid, Content, Date, Author)
