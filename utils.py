@@ -37,7 +37,7 @@ def genNewCoord(cacheID,small):
     WHERE caches.Cacheid = '%s'
     """ % (cacheID)
     result = c.execute(q)
-    return geoHash(result[0],result[1],small)
+    return geohash.geoHash(result[0],result[1],small)
     
 def validateCache(cacheID, passcode):
     conn = sqlite3.connect("GeoHashCache.db")
@@ -54,15 +54,15 @@ def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
     Date = time.strftime("%d-%m-%Y")
     hashed = hashlib.sha224(str(cacheID) + Date).hexdigest()
     validID = str(int(hashed,16))[0:10]
-    createCache(Latitude, Longitude, Type, Name, Description, cacheID, validID, Founder, Date)
+    generateDB.createCache(Latitude, Longitude, Type, Name, Description, cacheID, validID, Founder, Date)
     
 def register(Uname,Pword):
-    createUser(Uname,Pword,greatestUserID() + 1)
+    generateDB.createUser(Uname,Pword,greatestUserID() + 1)
 
 def Comment(Parentid, Content, Author):
     Commentid = lowestCommentID() - 1
     Date = time.strftime("%d-%m-%Y")
-    comment(Parentid, Commentid, Content, Date, Author)
+    generateDB.createComment(Parentid, Commentid, Content, Date, Author)
     
 def makeQR(cacheID):
     conn = sqlite3.connect("GeoHashCache.db")
