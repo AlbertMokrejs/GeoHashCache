@@ -88,14 +88,14 @@ def greatestUserID():
     return x
 
 def createUser(username,password,uid):
-    conn = sqlite3.connect("StoryBase.db")
+    conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q = """insert into login values ('%s','%s','%s');""" % (username,password,uid)
     c.execute(q)
     conn.commit()
     
 def createCache(Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date):
-    conn = sqlite3.connect("StoryBase.db")
+    conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q = """insert into caches values ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s');""" % (Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date, 0)
     c.execute(q)
@@ -105,7 +105,7 @@ def createCache(Latitude, Longitude, Type, Name, Description, Cacheid, Validid, 
     conn.commit
     
 def createComment(Parentid, Commentid, Content, Date, Author):
-    conn = sqlite3.connect("StoryBase.db")
+    conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q = """insert into comments values ('%s','%s','%s','%s','%s');""" % (Parentid, Commentid, Content, Date, Author)
     c.execute(q)
