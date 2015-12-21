@@ -54,7 +54,7 @@ def registerPage():
 @app.route("/logout")
 def home():
 	session["user"] = ""
-	return render_template("home.html")
+	return redirect("/home")
 	
 ##
 
