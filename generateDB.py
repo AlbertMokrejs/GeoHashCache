@@ -72,6 +72,20 @@ def lowestCommentID():
         if r[1] < x:
             x = r[1]
     return x
+    
+def greatestUserID():
+    #Gets all caches.
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q="""SELECT * FROM login;
+    	"""
+    result = c.execute(q)
+    #Loops through all IDs to find the greatest, starting at 0.
+    x = 0
+    for r in result:
+        if r[2] > x:
+            x = r[2]
+    return x
 
 def register(username,password,uid):
     conn = sqlite3.connect("StoryBase.db")
