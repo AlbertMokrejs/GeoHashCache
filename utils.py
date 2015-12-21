@@ -91,3 +91,41 @@ def makeQR(cacheID):
     result = c.execute(q)
     for r in result:
         return "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=validateCache/" + cacheID + "/" + r[1]
+        
+def cachesNear(lat, lon):
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q = """
+    SELECT *
+    FROM caches
+    WHERE abs(caches.Latitude - '%s') < 1, abs(caches.Longitude - '%s') < 1
+    """ % (lat, lon)
+    result = c.execute(q)
+    final = []
+    for r in result
+        final.append([r[3],r[0],r[1]],r[5])
+    return final
+
+def getCache(uid):
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q = """
+    SELECT *
+    FROM caches
+    WHERE uid = '%s'
+    """ % (uid)
+    result = c.execute(q)
+    for r in result:
+        final = {}
+        final["lat"] = r[0]
+        final["lon"] = r[1]
+        final["type"] = r[2]
+        final["name"] = r[3]
+        final["desc"] = r[4]
+        final["id"] = r[5]
+        final["founder"] = r[7]
+        final["date"] = r[8]
+        final["stat"] = r[9]
+        return final
+    
+    
