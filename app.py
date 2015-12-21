@@ -47,6 +47,8 @@ def registerPage():
         		utils.register(uname,pword)
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
+        		if session["redir"]:
+        			return 
         		return redirect("/home")
         	else:
             		session["user"] = ""
@@ -60,6 +62,14 @@ def logout():
 	session["user"] = ""
 	session["uid"] = -1
 	return redirect("/home")
+	
+@app.route("/found",methods=["GET","POST"])
+def foundCache():
+	if request.method=="GET":
+		if not (session["user"] and session["user"] != ""):
+			session["redir"] = "/found"
+			return redirect("/login")
+	makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
 	
 ##
 
