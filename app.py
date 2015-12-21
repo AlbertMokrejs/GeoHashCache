@@ -53,7 +53,7 @@ def registerPage():
         		session["uid"] = utils.authenticate(uname,pword)[1]
         		if session["redir"] and session["redir"] != "":
         			redir = session["redir"]
-        			session["redir" = ""
+        			session["redir"] = ""
         			return redirect(redir)
         		return redirect("/home")
         	else:
@@ -88,8 +88,6 @@ def foundCache():
 	
 ##
 
-
-
 @app.route("/moveCache/<cacheID>")
 def moveCache(cacheID = 0):
 	return genNewCoord(cacheID, False)
@@ -103,7 +101,10 @@ def moveCacheB(cacheID = 0):
 def checkCache(cacheID = 0, validID = 0):
 	return validateCache(cacheID, validID)
 
-
+@app.route("/cache/<uid>")
+def cacheProfile( uid = 0):
+        return render_template( "cache.html", utils.getCache( uid ))
+        
 
 if (__name__ == "__main__"):
         app.debug = True
