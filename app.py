@@ -9,6 +9,8 @@ import geohash
 generateDB.checkGenerate()
 
 ##
+##
+##
 
 app = Flask(__name__)
 
@@ -85,7 +87,13 @@ def foundCache():
 		Name = request.form["Name"]
 		newID = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
 		return render_template("found.html", name = Name, IMG = utils.makeQR(newID))
+
+@app.route("/cache/<uid>")
+def cacheProfile( uid = 0):
+        return render_template( "cache.html", utils.getCache( uid ))
 	
+##
+##
 ##
 
 @app.route("/moveCache/<cacheID>")
@@ -101,9 +109,7 @@ def moveCacheB(cacheID = 0):
 def checkCache(cacheID = 0, validID = 0):
 	return validateCache(cacheID, validID)
 
-@app.route("/cache/<uid>")
-def cacheProfile( uid = 0):
-        return render_template( "cache.html", utils.getCache( uid ))
+
         
 
 if (__name__ == "__main__"):
