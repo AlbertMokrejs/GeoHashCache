@@ -75,15 +75,16 @@ def foundCache():
 		if not (session["user"] and session["user"] != ""):
 			session["redir"] = "/found"
 			return redirect("/login")
+		return render_template("found.html")
 	else:
-		Founder = request.form['username']
+		Founder = session["user"]
 		Latitude = request.form['Latitude']
 		Longitude = request.form['Longitude']
 		Type = request.form['Type']
 		Description = request.form['Desc']
 		Name = request.form["Name"]
 		newID = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
-		return redirect("/found", name = Name, IMG = utils.makeQR(newID))
+		return render_template("found.html", name = Name, IMG = utils.makeQR(newID))
 	
 ##
 
