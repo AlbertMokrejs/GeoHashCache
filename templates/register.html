@@ -2,20 +2,20 @@
 {% extends "base.html" %}
 
 {% block title %}
-GeoHashCache - Register
+<title>GeoHashCache - Register</title>
 {% endblock %}
 
 {% block row %}
 
-{if error %}
+{% if error %}
 <center><h3>{{error}}</h3></center><br><br>
 {% endif %}
 
-<form class="form-container" method="POST">
+<center><br><br><form class="form-container" method="POST">
 <div class="form-title"><h2>Register</h2></div>
-<div class="form-title">Username :</div>
+<div class="form-title" style="text-align:left">Username :</div>
 <input class="form-field" type="text" name="username" placeholder="username" required/><br />
-<div class="form-title">Password :</div>
+<div class="form-title" style="text-align:left">Password :</div>
 <input class="form-field" type="text" name="password" placeholder="password" required/><br />
 <div class="form-title">Confirm Password :</div>
 <input class="form-field" type="text" name="confirm" placeholder="confirm" required/><br />
@@ -23,5 +23,8 @@ GeoHashCache - Register
 <input class="submit-button" name="button" type="submit" value="Submit" />
 </div>
 </form>
-
+<br><br></center>
+<div class="col-lg-12">
+	<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+</div>	
 {% endblock %}
