@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}
+<title>GeoHashCache - Cache</title>
+{% endblock %}
+
+{% block row %}
+{% if data %}
+<br><br><center>
+<h1>{{data["name"]}}</h1>
+<h2>{{data["lat"]}} : {{data["lon"]}}</h2><br><br>
+<p>A {{data["type"]}} cache: {{data["desc"]}}.</p>
+<p>Founded by {{data["found"]}} on {{data["date"]}}.</p><br><br>
+<p></p>
+{% endif %}
+{% endblock %}
