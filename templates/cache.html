@@ -12,6 +12,21 @@
 <h2>{{data["lat"]}} : {{data["lon"]}}</h2><br><br>
 <p>A {{data["type"]}} cache: {{data["desc"]}}.</p>
 <p>Founded by {{data["found"]}} on {{data["date"]}}.</p><br><br>
-<p></p>
+{% if Error %}
+<p style="color:green">{{Error}}</p>
+{% endif %}
+<p>Current status: {{data["stat"]}}</p><br><br>
+<form method="POST">
+<p>REPORT AS
+<select>
+  <option value="Lost" selected="selected">Lost</option>
+  <option value="Damaged">Damaged</option>
+</select>
+<input type="submit" style="color:red" name="status" value="status">
+</p>
+</form><br><br>
+<form method="POST">
+  <p>Found this cache? Validate it: <input type="text" name="validID" value="validID"> <input type="submit" name="Validate" value="submit"></p>
+</form>
 {% endif %}
 {% endblock %}
