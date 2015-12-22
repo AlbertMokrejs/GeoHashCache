@@ -104,33 +104,78 @@ def cacheProfile( uid = 0):
 			data["stat"] = "Damaged"
         	return render_template( "cache.html", data = data)
         else:
-        	stat = request.form['status']
-        	if stat == "Lost":
-        		stat = 2
-        	if stat == "Damaged":
-        		stat = 3
-        	data = utils.getCache( uid )
-        	utils.updateCache(uid, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
-        	return redirect("/cache/" + uid)
+        	if request.form['status']:
+        		stat = request.form['status']
+        		if stat == "Lost":
+        			stat = 2
+        		if stat == "Damaged":
+        			stat = 3
+        		data = utils.getCache( uid )
+        		utils.updateCache(uid, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
+        		data = utils.getCache( uid )
+        		if data["stat"] == 0:
+				data["stat"] = "Normal"
+			if data["stat"] == 1:
+				data["stat"] = "Being Relocated"
+			if data["stat"] == 2:
+				data["stat"] = "Lost"
+			if data["stat"] == 3:
+				data["stat"] = "Damaged"
+		 	return render_template( "cache.html", data = data, Error = "Report Processed")
+		 else:
+		 	return redirect("/validateCache/" + uid + "/" + request.form["validID"])
         
         
 @app.route("/validateCache/<cacheID>/<validID>")
+def validateCache(cacheID = 0, validID = 0):
+	request = urllib2.urlopen("/chechCache/" + cacheID + "/" + validID)
+	result = request.read()
+	if not (session["user"] and session["user"] != ""):
+		session["redir"] = "/validateCache/" + cacheID + "/" + validID
+		return redirect("/login")
+	else:
+		if result:
+			data = utils.getCache(cacheID)
+			utils.appendProfile(session["uid"],[data["name"],data["lat"],data["lon"]])
+			## TEMPORARY
+			if data["stat"] == 0:
+				data["stat"] = "Normal"
+			if data["stat"] == 1:
+				data["stat"] = "Being Relocated"
+			if data["stat"] == 2:
+				data["stat"] = "Lost"
+			if data["stat"] == 3:
+				data["stat"] = "Damaged"
+	  		return render_template("cache.html", data = data, Error = "Succesfully Validated")
+		else:	
+			data = utils.getCache(cacheID)
+			utils.appendProfile(session["uid"],[data["name"],data["lat"],data["lon"]])
+			## TEMPORARY
+			if data["stat"] == 0:
+				data["stat"] = "Normal"
+			if data["stat"] == 1:
+				data["stat"] = "Being Relocated"
+			if data["stat"] == 2:
+				data["stat"] = "Lost"
+			if data["stat"] == 3:
+				data["stat"] = "Damaged"
+	  		return render_template("cache.html", data = data, Error = "Failed To Validate")
 	
 ## ------ app.py API code, accessed only by local file -------- ##
 
 
 @app.route("/moveCache/<cacheID>")
 def moveCache(cacheID = 0):
-	return genNewCoord(cacheID, False)
+	return utils.genNewCoord(cacheID, False)
   
 
 @app.route("/closeMoveCache/<cacheID>")
 def moveCacheB(cacheID = 0):
-	return genNewCoord(cacheID, True)
+	return utils.genNewCoord(cacheID, True)
 	
 @app.route("/checkCache/<cacheID>/<validID>")
 def checkCache(cacheID = 0, validID = 0):
-	return validateCache(cacheID, validID)
+	return utils.validateCache(cacheID, validID)
         
 
 if (__name__ == "__main__"):
