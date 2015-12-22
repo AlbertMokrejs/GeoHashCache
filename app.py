@@ -152,7 +152,6 @@ def validateCache(cacheID = 0, validID = 0):
 	  		return render_template("cache.html", data = data, Error = "Succesfully Validated")
 		else:	
 			data = utils.getCache(cacheID)
-			utils.appendProfile(session["uid"],[data["name"],data["lat"],data["lon"]])
 			## TEMPORARY
 			if data["stat"] == 0:
 				data["stat"] = "Normal"
