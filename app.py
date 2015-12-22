@@ -90,9 +90,31 @@ def foundCache():
 			return render_template("found.html", name = Name, IMG = utils.makeQR(newID)[0], validID = utils.makeQR(newID)[1])
 		return render_template("found.html", Error = "Please Fill Out The Form Completely")
 			
-@app.route("/cache/<uid>")
+@app.route("/cache/<uid>",methods=["GET","POST"])
 def cacheProfile( uid = 0):
-        return render_template( "cache.html", utils.getCache( uid ))
+	if request.method=="GET":
+		data = utils.getCache( uid )
+		if data["stat"] == 0:
+			data["stat"] = "Normal"
+		if data["stat"] == 1:
+			data["stat"] = "Being Relocated"
+		if data["stat"] == 2:
+			data["stat"] = "Lost"
+		if data["stat"] == 3:
+			data["stat"] = "Damaged"
+        	return render_template( "cache.html", data = data)
+        else:
+        	stat = request.form['status']
+        	if stat == "Lost":
+        		stat = 2
+        	if stat == "Damaged":
+        		stat = 3
+        	data = utils.getCache( uid )
+        	utils.updateCache(uid, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
+        	return redirect("/cache/" + uid)
+        
+        
+@app.route("/validateCache/<cacheID>/<validID>")
 	
 ## ------ app.py API code, accessed only by local file -------- ##
 
