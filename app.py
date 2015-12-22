@@ -79,15 +79,17 @@ def foundCache():
 			return redirect("/login")
 		return render_template("found.html")
 	else:
-		Founder = session["user"]
-		Latitude = request.form['Latitude']
-		Longitude = request.form['Longitude']
-		Type = request.form['Type']
-		Description = request.form['Desc']
-		Name = request.form["Name"]
-		newID = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
-		return render_template("found.html", name = Name, IMG = utils.makeQR(newID))
-
+		if "Latitude" in request.form.keys() and "Longitude" in request.form.keys() and "Type" in request.form.keys() and "Name" in request.form.keys() and "Desc" in request.form.keys():
+			Founder = session["user"]
+			Latitude = request.form['Latitude']
+			Longitude = request.form['Longitude']
+			Type = request.form['Type']
+			Description = request.form['Desc']
+			Name = request.form["Name"]
+			newID = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
+			return render_template("found.html", name = Name, IMG = utils.makeQR(newID)[0], validID = utils.makeQR(newID)[1])
+		return render_template("found.html", Error = "Please Fill Out The Form Completely")
+			
 @app.route("/cache/<uid>")
 def cacheProfile( uid = 0):
         return render_template( "cache.html", utils.getCache( uid ))
