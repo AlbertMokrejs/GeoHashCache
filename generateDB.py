@@ -103,7 +103,7 @@ def createCache(Latitude, Longitude, Type, Name, Description, Cacheid, Validid, 
     q = """insert into caches values ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s');""" % (Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date, 0)
     c.execute(q)
     conn.commit()
-    q = """insert into cacheIDs value ('%s','%s');""" % (Cacheid, Validid)
+    q = """insert into cacheIDs values ('%s','%s');""" % (Cacheid, Validid)
     c.execute(q)
     conn.commit
     
