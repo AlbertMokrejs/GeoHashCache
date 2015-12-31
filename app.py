@@ -10,7 +10,7 @@ import utils
 import geohash
 
 generateDB.checkGenerate()
-session["user"] = ""
+
 
 ##
 ##
@@ -57,7 +57,7 @@ def registerPage():
         		utils.register(uname,pword)
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
-        		if session["redir"] and session["redir"] != "":
+        		if "redir" in session.keys() and session["redir"] != "":
         			redir = session["redir"]
         			session["redir"] = ""
         			return redirect(redir)
@@ -78,7 +78,7 @@ def logout():
 @app.route("/found",methods=["GET","POST"])
 def foundCache():
 	if request.method=="GET":
-		if not (session["user"] and session["user"] != ""):
+		if not ("user" in session.keys() and session["user"] != ""):
 			session["redir"] = "/found"
 			return redirect("/login")
 		return render_template("found.html")
@@ -134,7 +134,7 @@ def cacheProfile( uid = 0):
 def validateCache(cacheID = 0, validID = 0):
 	request = urllib2.urlopen("/chechCache/" + cacheID + "/" + validID)
 	result = request.read()
-	if not (session["user"] and session["user"] != ""):
+	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
 		return redirect("/login")
 	else:
