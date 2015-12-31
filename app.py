@@ -35,7 +35,7 @@ def login():
         	if utils.authenticate(uname,pword)[0]:
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
-        		if session["redir"] and session["redir"] != "":
+        		if "redir" in session.keys() and session["redir"] != "":
         			redir = session["redir"]
         			session["redir"] = ""
         			return redirect(redir)
@@ -108,7 +108,7 @@ def cacheProfile( uid = 0):
 			data["stat"] = "Damaged"
         	return render_template( "cache.html", data = data)
         else:
-        	if request.form['status']:
+        	if "status" in request.form.keys():
         		stat = request.form['status']
         		if stat == "Lost":
         			stat = 2
