@@ -17,7 +17,7 @@ def checkGenerate():
    CREATE TABLE login(
       Username TEXT,
       Password TEXT,
-      Uid REAL
+      Uid REAL,
       Profile BLOB
    );""","""CREATE TABLE caches(
       Latitude REAL, 
