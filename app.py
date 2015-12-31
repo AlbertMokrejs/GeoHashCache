@@ -125,7 +125,7 @@ def cacheProfile( uid = 0):
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
 		 	return render_template( "cache.html", data = data, Error = "Report Processed")
-		 else:
+		else:
 		 	return redirect("/validateCache/" + uid + "/" + request.form["validID"])
         
         
