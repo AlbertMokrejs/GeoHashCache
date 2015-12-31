@@ -10,6 +10,7 @@ import utils
 import geohash
 
 generateDB.checkGenerate()
+session["user"] = ""
 
 ##
 ##
