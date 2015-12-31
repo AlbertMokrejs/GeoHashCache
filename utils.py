@@ -93,6 +93,7 @@ def makeQR(cacheID):
     result = c.execute(q)
     for r in result:
         return ["https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=validateCache/" + cacheID + "/" + r[1],r[1]]
+    return ["",""]
         
 def cachesNear(lat, lon):
     conn = sqlite3.connect("GeoHashCache.db")
