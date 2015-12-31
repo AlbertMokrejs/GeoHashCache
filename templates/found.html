@@ -14,20 +14,41 @@
 </center></br></br>
 {% else %}
 <br><br><center>
+<table style="width:50%;padding="15px">
 <form method="POST">
-<p>Name your cache: <input type="text" name="Name" placeHolder="Name" required/></p>
-<p>Enter coordinates: <input type="text" name="Latitude" placeHolder="Latitude" required/> <input type="text" name="Longitude" placeHolder="Longitude" required/></p>
-<p>Choose a cache type: 
-<select name="Type">
+<tr>
+<td>Name your cache: </td>
+<td><input type="text" name="Name" placeHolder="Name" required/></td>
+</tr>
+<tr>
+<td>Enter latitude: </td>
+<td><input type="text" name="Latitude" placeHolder="Latitude" required/></td>
+</tr>
+<tr>
+<td>Enter Longitude: </td> 
+<td><input type="text" name="Longitude" placeHolder="Longitude" required/></td>
+</tr>
+<tr>
+<td>Choose a cache type: </td>
+<td><select name="Type">
   <option value="Standard" selected="selected">Standard</option>
   <option value="Puzzle">Puzzle</option>
   <option value="Series">Series</option>
-</select>
-</p>
-<p>Enter a description for your Cache. This description should be informative and should contain the puzzle or clues for your puzzle cache if relevant. <input type="text" name="Desc" placeHolder="Desc" required/></p>
+</select></td>
+</tr>
+<tr>
+<td>Enter a description for your Cache. This description should be informative and should contain the puzzle or clues for your puzzle cache if relevant. </td>
+<td><input type="text" name="Desc" placeHolder="Desc" required/></td>
+</tr>
+<tr>
+<td></td>
+<td>
 {% if error  %}
 <p>ERROR</p>
 {% endif %}
+</td>
+</tr>
+</table>
 <p><input name="button" type="submit" value="Submit"></p></form>
 </center></br></br>
 {% endif %}
