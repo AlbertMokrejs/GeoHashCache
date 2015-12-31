@@ -81,7 +81,7 @@ def foundCache():
 		if not ("user" in session.keys() and session["user"] != ""):
 			session["redir"] = "/found"
 			return redirect("/login")
-		return render_template("found.html")
+		return render_template("found.html", Username = session["user"])
 	else:
 		if "Latitude" in request.form.keys() and "Longitude" in request.form.keys() and "Type" in request.form.keys() and "Name" in request.form.keys() and "Desc" in request.form.keys():
 			Founder = session["user"]
@@ -91,8 +91,8 @@ def foundCache():
 			Description = request.form['Desc']
 			Name = request.form["Name"]
 			newID = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
-			return render_template("found.html", name = Name, IMG = utils.makeQR(newID)[0], validID = utils.makeQR(newID)[1])
-		return render_template("found.html", Error = "Please Fill Out The Form Completely")
+			return render_template("found.html", name = Name, IMG = utils.makeQR(newID)[0], validid = utils.makeQR(newID)[1] , Username = session["user"])
+		return render_template("found.html", Error = "Please Fill Out The Form Completely", Username = session["user"])
 			
 @app.route("/cache/<uid>",methods=["GET","POST"])
 def cacheProfile( uid = 0):
@@ -106,7 +106,7 @@ def cacheProfile( uid = 0):
 			data["stat"] = "Lost"
 		if data["stat"] == 3:
 			data["stat"] = "Damaged"
-        	return render_template( "cache.html", data = data)
+        	return render_template( "cache.html", data = data, Username = session["user"])
         else:
         	if "status" in request.form.keys():
         		stat = request.form['status']
@@ -125,7 +125,7 @@ def cacheProfile( uid = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-		 	return render_template( "cache.html", data = data, Error = "Report Processed")
+		 	return render_template( "cache.html", data = data, Error = "Report Processed", Username = session["user"])
 		else:
 		 	return redirect("/validateCache/" + uid + "/" + request.form["validID"])
         
@@ -150,7 +150,7 @@ def validateCache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("cache.html", data = data, Error = "Succesfully Validated")
+	  		return render_template("cache.html", data = data, Error = "Succesfully Validated", Username = session["user"])
 		else:	
 			data = utils.getCache(cacheID)
 			## TEMPORARY
@@ -162,7 +162,7 @@ def validateCache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("cache.html", data = data, Error = "Failed To Validate")
+	  		return render_template("cache.html", data = data, Error = "Failed To Validate", Username = session["user"])
 	
 ## ------ app.py API code, accessed only by local file -------- ##
 
