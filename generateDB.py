@@ -92,7 +92,7 @@ def greatestUserID():
 def createUser(username,password,uid):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q = """insert into login values ('%s','%s','%s');""" % (username,password,uid,marshal.dumps([]))
+    q = """insert into login values ('%s','%s','%s','%');""" % (username,password,uid,str(marshal.dumps([])))
     c.execute(q)
     conn.commit()
     
