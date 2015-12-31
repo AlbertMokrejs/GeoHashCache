@@ -83,7 +83,7 @@ def foundCache():
 			return redirect("/login")
 		return render_template("found.html", Username = session["user"])
 	else:
-		if "Latitude" in request.form.keys() and "Longitude" in request.form.keys() and "Type" in request.form.keys() and "Name" in request.form.keys() and "Desc" in request.form.keys():
+		try:
 			Founder = session["user"]
 			Latitude = request.form['Latitude']
 			Longitude = request.form['Longitude']
@@ -92,7 +92,8 @@ def foundCache():
 			Name = request.form["Name"]
 			newID = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
 			return render_template("found.html", name = Name, IMG = utils.makeQR(newID)[0], validID = utils.makeQR(newID)[1] , Username = session["user"])
-		return render_template("found.html", Error = "Please Fill Out The Form Completely", Username = session["user"])
+		except:
+			return render_template("found.html", Error = "Please Fill Out The Form Completely", Username = session["user"])
 			
 @app.route("/cache/<uid>",methods=["GET","POST"])
 def cacheProfile( uid = 0):
