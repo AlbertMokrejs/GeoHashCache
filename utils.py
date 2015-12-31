@@ -1,6 +1,7 @@
 import sqlite3
 import geohash
 import generateDB
+import hashlib
 import time
 
 def authenticate(username,password):
