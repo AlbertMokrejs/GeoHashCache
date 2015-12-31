@@ -102,7 +102,7 @@ def cachesNear(lat, lon):
     """ % (lat, lon)
     result = c.execute(q)
     final = []
-    for r in result
+    for r in result:
         final.append([r[3],r[0],r[1]],r[5])
     return final
 
