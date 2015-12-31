@@ -50,7 +50,7 @@ def validateCache(cacheID, passcode):
     return False
     
 def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
-    cacheID = greatestCacheID() + 1
+    cacheID = generateDB.greatestCacheID() + 1
     Date = time.strftime("%d-%m-%Y")
     hashed = hashlib.sha224(str(cacheID) + Date).hexdigest()
     validID = str(int(hashed,16))[0:10]
