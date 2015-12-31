@@ -91,7 +91,7 @@ def foundCache():
 			Description = request.form['Desc']
 			Name = request.form["Name"]
 			newID = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
-			return render_template("found.html", name = Name, IMG = utils.makeQR(newID)[0], validid = utils.makeQR(newID)[1] , Username = session["user"])
+			return render_template("found.html", name = Name, IMG = utils.makeQR(newID)[0], validID = utils.makeQR(newID)[1] , Username = session["user"])
 		return render_template("found.html", Error = "Please Fill Out The Form Completely", Username = session["user"])
 			
 @app.route("/cache/<uid>",methods=["GET","POST"])
