@@ -85,8 +85,8 @@ def foundCache():
 	else:
 		try:
 			Founder = session["user"]
-			Latitude = request.form['Latitude']
-			Longitude = request.form['Longitude']
+			Latitude = float(request.form['Latitude'])
+			Longitude = float(request.form['Longitude'])
 			Type = request.form['Type']
 			Description = request.form['Desc']
 			Name = request.form["Name"]
