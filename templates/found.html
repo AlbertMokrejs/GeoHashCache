@@ -16,8 +16,8 @@
 </center></br></br>
 {% else %}
 <br><br><center>
-<table style="width:50%>
-<form method="POST">
+<form action="found" method="POST">
+<table style="width:50%">
 <tr>
 <td>Name your cache: </td>
 <td><input type="text" name="Name" placeHolder="Name" required/></td>
@@ -32,7 +32,7 @@
 </tr>
 <tr>
 <td>Choose a cache type: </td>
-<td><select name="Type">
+<td><select name="Type"/>
   <option value="Standard" selected="selected">Standard</option>
   <option value="Puzzle">Puzzle</option>
   <option value="Series">Series</option>
@@ -45,13 +45,15 @@
 <tr>
 <td></td>
 <td>
-{% if error  %}
+{% if Error %}
 <p>ERROR</p>
 {% endif %}
 </td>
 </tr>
 </table>
-<p><input name="button" type="submit" value="Submit"></p></form>
+<br>
+<input name="submit" type="submit" value="Submit" />
+</form>
 </center></br></br>
 {% endif %}
 {% endblock %}

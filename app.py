@@ -27,6 +27,9 @@ def home():
 	
 @app.route("/login",methods=["GET","POST"])
 def login():
+	if "redir" in session.keys() and session["redir"] != "":
+        			redir = session["redir"]
+        			session["redir"] = ""
 	if request.method=="GET":
         	return render_template("login.html")
         else:
@@ -35,9 +38,7 @@ def login():
         	if utils.authenticate(uname,pword)[0]:
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
-        		if "redir" in session.keys() and session["redir"] != "":
-        			redir = session["redir"]
-        			session["redir"] = ""
+        		if redir:
         			return redirect(redir)
         		return redirect("/home")
         	else:
@@ -48,6 +49,9 @@ def login():
 
 @app.route("/register",methods=["GET","POST"])
 def registerPage():
+	if "redir" in session.keys() and session["redir"] != "":
+        			redir = session["redir"]
+        			session["redir"] = ""
 	if request.method=="GET":
         	return render_template("register.html")
         else:
@@ -57,9 +61,7 @@ def registerPage():
         		utils.register(uname,pword)
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
-        		if "redir" in session.keys() and session["redir"] != "":
-        			redir = session["redir"]
-        			session["redir"] = ""
+        		if redir:
         			return redirect(redir)
         		return redirect("/home")
         	else:
@@ -85,8 +87,8 @@ def foundCache():
 	else:
 		try:
 			Founder = session["user"]
-			Latitude = request.form['Latitude']
-			Longitude = request.form['Longitude']
+			Latitude = float(request.form['Latitude'])
+			Longitude = float(request.form['Longitude'])
 			Type = request.form['Type']
 			Description = request.form['Desc']
 			Name = request.form["Name"]
