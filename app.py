@@ -38,7 +38,7 @@ def login():
         	if utils.authenticate(uname,pword)[0]:
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
-        		if redir:
+        		if "redir" in locals():
         			return redirect(redir)
         		return redirect("/home")
         	else:
@@ -61,7 +61,7 @@ def registerPage():
         		utils.register(uname,pword)
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
-        		if redir:
+        		if 'redir' in locals():
         			return redirect(redir)
         		return redirect("/home")
         	else:
