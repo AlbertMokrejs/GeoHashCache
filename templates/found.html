@@ -2,58 +2,58 @@
 {% extends "base.html" %}
 
 {% block title %}
-<title>GeoHashCache - Found a Cache</title>
+    <title>GeoHashCache - Found a Cache</title>
 {% endblock %}
 
 
 
 {% block row %}
 {% if name and IMG and validID %}
-<br><br><center>
-<p>Congratulations, you've successfully founded {{name}} as a GeoHashCache.</p>
-<p>Be sure to include this Validation ID in your cache so that users can validate your cache: {{validID}}</p>
-<p>Alternatively, you can use this QR code for easy validation: <img src={{IMG}}></p>
-</center></br></br>
+    <br><br><center>
+    <p>Congratulations, you've successfully founded {{name}} as a GeoHashCache.</p>
+    <p>Be sure to include this Validation ID in your cache so that users can validate your cache: {{validID}}</p>
+    <p>Alternatively, you can use this QR code for easy validation: <img src={{IMG}}></p>
+    </center></br></br>
 {% else %}
-<br><br><center>
-<form action="found" method="POST">
-<table style="width:50%">
-<tr>
-<td>Name your cache: </td>
-<td><input type="text" name="Name" placeHolder="Name" required/></td>
-</tr>
-<tr>
-<td>Enter latitude: </td>
-<td><input type="text" name="Latitude" placeHolder="Latitude" required/></td>
-</tr>
-<tr>
-<td>Enter Longitude: </td> 
-<td><input type="text" name="Longitude" placeHolder="Longitude" required/></td>
-</tr>
-<tr>
-<td>Choose a cache type: </td>
-<td><select name="Type"/>
-  <option value="Standard" selected="selected">Standard</option>
-  <option value="Puzzle">Puzzle</option>
-  <option value="Series">Series</option>
-</select></td>
-</tr>
-<tr>
-<td>Enter a description for your Cache. This description should be informative and should contain the puzzle or clues for your puzzle cache if relevant. </td>
-<td><input type="text" name="Desc" placeHolder="Desc" required/></td>
-</tr>
-<tr>
-<td></td>
-<td>
-{% if Error %}
-<p>ERROR</p>
-{% endif %}
-</td>
-</tr>
-</table>
-<br>
-<input name="submit" type="submit" value="Submit" />
-</form>
+    <br><br><center>
+    <form action="found" method="POST">
+        <table style="width:50%">
+            <tr>
+                <td>Name your cache: </td>
+                <td><input type="text" name="Name" placeHolder="Name" required/></td>
+            </tr>
+            <tr>
+                <td>Enter latitude: </td>
+                <td><input type="text" name="Latitude" placeHolder="Latitude" required/></td>
+            </tr>
+            <tr>
+                <td>Enter Longitude: </td> 
+                <td><input type="text" name="Longitude" placeHolder="Longitude" required/></td>
+            </tr>
+            <tr>
+                <td>Choose a cache type: </td>
+                <td><select name="Type"/>
+                    <option value="Standard" selected="selected">Standard</option>
+                    <option value="Puzzle">Puzzle</option>
+                    <option value="Series">Series</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>Enter a description for your Cache. This description should be informative and should contain the puzzle or clues for your puzzle cache if relevant. </td>
+                <td><input type="text" name="Desc" placeHolder="Desc" required/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    {% if Error %}
+                        <p>ERROR</p>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+        <br>
+        <input name="submit" type="submit" value="Submit" />
+    </form>
 </center></br></br>
 {% endif %}
 {% endblock %}
