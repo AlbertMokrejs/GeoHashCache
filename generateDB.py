@@ -102,7 +102,7 @@ def createUser(username,password,uid):
 def createCache(Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q = """insert into caches values ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s');""" % (Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date, 0)
+    q = """insert into caches values (%s,%s,'%s','%s','%s','%s',%s,%s,'%s',%s);""" % (Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date, 0)
     print q
     c.execute(q)
     conn.commit()
