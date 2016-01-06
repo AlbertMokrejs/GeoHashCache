@@ -93,7 +93,7 @@ def foundCache():
 			Type = request.form['Type']
 			Description = request.form['Desc']
 			Name = request.form["Name"]
-			newID = int(utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder))
+			newID = float(int(utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)))
 			print sys.exc_info()[0]
 			IMG = utils.makeQR(newID)[0]
 			validID = utils.makeQR(newID)[1] 
