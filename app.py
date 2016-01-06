@@ -96,7 +96,9 @@ def foundCache():
 			BODGE = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
 			print sys.exc_info()[0]
 			IMG = utils.makeQR(BODGE[0],BODGE[1])[0]
-			validID = utils.makeQR(BODGE[0],BODGE[1])[1] 
+			print IMG
+			validID = utils.makeQR(BODGE[0],BODGE[1])[1]
+			print validID
 			print sys.exc_info()[0]
 			return render_template("found.html", name = Name, IMG = IMG, validID = validID, Username = session["user"])
 		except:
