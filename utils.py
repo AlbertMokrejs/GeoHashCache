@@ -10,8 +10,7 @@ def authenticate(username,password):
     q = """
     SELECT *
     FROM login
-    WHERE login.Username = '%s'
-    """ % (username)
+    WHERE login.Username = '%s';""" % (username)
     result = c.execute(q)
     for r in result:
         if r[1] == password:
@@ -36,7 +35,7 @@ def genNewCoord(cacheID,small):
     q = """
     SELECT Latitude, Longitude
     FROM caches
-    WHERE caches.Cacheid = %s
+    WHERE caches.Cacheid = %s;
     """ % (cacheID)
     result = c.execute(q)
     return geohash.geoHash(result[0],result[1],small)
@@ -44,7 +43,7 @@ def genNewCoord(cacheID,small):
 def validateCache(cacheID, passcode):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q = """SELECT * FROM cacheIDs WHERE cacheIDs.Cacheid = %s""" % (cacheID)
+    q = """SELECT * FROM cacheIDs WHERE cacheIDs.Cacheid = %s;""" % (cacheID)
     result = c.execute(q)
     for r in result:
         if r[1] == passcode:
@@ -68,7 +67,7 @@ def register(Uname,Pword):
 def getProfile(uid):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q = """SELECT * FROM login WHERE login.Uid = %s""" % (uid)
+    q = """SELECT * FROM login WHERE login.Uid = %s;""" % (uid)
     result = c.execute(q)
     for r in result:
         return marshal.loads(base64.b64decode(r[3]))
@@ -78,7 +77,7 @@ def setProfile(uid,blob):
     c = conn.cursor()
     q = """UPDATE login
         SET Profile = '%s'
-        WHERE login.Uid = %s""" % (base64.b64encode(marshal.dumps(blob)),uid)
+        WHERE login.Uid = %s;""" % (base64.b64encode(marshal.dumps(blob)),uid)
     c.execute(q)
 
 def appendProfile(uid,blob):
@@ -92,7 +91,7 @@ def Comment(Parentid, Content, Author):
 def makeQR(cacheID):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q = """SELECT * FROM cacheIDs WHERE Cacheid = %s""" % (cacheID)
+    q = """SELECT * FROM cacheIDs WHERE cacheIDs.Cacheid = %s;""" % (cacheID)
     print q
     result = c.execute(q)
     print result
@@ -107,7 +106,7 @@ def cachesNear(lat, lon):
     q = """
     SELECT *
     FROM caches
-    WHERE abs(caches.Latitude - %s) < 1, abs(caches.Longitude - %s) < 1
+    WHERE abs(caches.Latitude - %s) < 1, abs(caches.Longitude - %s) < 1;
     """ % (lat, lon)
     result = c.execute(q)
     final = []
@@ -121,7 +120,7 @@ def getCache(uid):
     q = """
     SELECT *
     FROM caches
-    WHERE uid = %s
+    WHERE uid = %s;
     """ % (uid)
     result = c.execute(q)
     for r in result:
