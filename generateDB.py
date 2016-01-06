@@ -56,9 +56,11 @@ def greatestCacheID():
     result = c.execute(q)
     #Loops through all IDs to find the greatest, starting at 0.
     x = 0
+    print result
     for r in result:
         if r[5] > x:
             x = r[5]
+    print x
     return x
 
 #Finds the ID of the latest comment.
@@ -101,9 +103,11 @@ def createCache(Latitude, Longitude, Type, Name, Description, Cacheid, Validid, 
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q = """insert into caches values ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s');""" % (Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date, 0)
+    print q
     c.execute(q)
     conn.commit()
     q = """insert into cacheIDs values ('%s','%s');""" % (Cacheid, Validid)
+    print q
     c.execute(q)
     conn.commit
     

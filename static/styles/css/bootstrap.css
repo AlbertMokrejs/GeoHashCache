@@ -185,10 +185,17 @@ table {
     border-collapse: collapse;
 }
 td {
+<<<<<<< HEAD
     padding: 10;
 }
 th {
     padding: 10;
+=======
+	padding: 15;
+}
+th {
+    padding: 15;
+>>>>>>> origin/HEAD
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {

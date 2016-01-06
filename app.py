@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
+import sys
 from random import randint
 
 import urllib2
@@ -92,9 +93,15 @@ def foundCache():
 			Type = request.form['Type']
 			Description = request.form['Desc']
 			Name = request.form["Name"]
-			newID = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
-			return render_template("found.html", name = Name, IMG = utils.makeQR(newID)[0], validID = utils.makeQR(newID)[1] , Username = session["user"])
+			newID = int(utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder))
+			print sys.exc_info()[0]
+			IMG = utils.makeQR(newID)[0]
+			validID = utils.makeQR(newID)[1] 
+			print sys.exc_info()[0]
+			return render_template("found.html", name = Name, IMG = IMG, validID = validID, Username = session["user"])
 		except:
+			e = sys.exc_info()[0]
+			print e
 			return render_template("found.html", Error = "Please Fill Out The Form Completely", Username = session["user"])
 			
 @app.route("/cache/<uid>",methods=["GET","POST"])

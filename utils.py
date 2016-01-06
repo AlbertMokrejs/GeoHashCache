@@ -53,9 +53,12 @@ def validateCache(cacheID, passcode):
     
 def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
     cacheID = generateDB.greatestCacheID() + 1
+    print cacheID
     Date = time.strftime("%d-%m-%Y")
+    print Date
     hashed = hashlib.sha224(str(cacheID) + Date).hexdigest()
     validID = int(str(int(hashed,16))[0:10])
+    print validID
     generateDB.createCache(Latitude, Longitude, Type, Name, Description, cacheID, validID, Founder, Date)
     return cacheID
     
@@ -89,8 +92,9 @@ def Comment(Parentid, Content, Author):
 def makeQR(cacheID):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q = """SELECT * FROM cacheIDs WHERE Cacheid = '%s'""" % (cacheID)
+    q = """SELECT * FROM cacheIDs WHERE Cacheid = %s""" % (cacheID)
     result = c.execute(q)
+    print result
     for r in result:
         return ["https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=validateCache/" + cacheID + "/" + r[1],r[1]]
     return ["",""]
