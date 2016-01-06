@@ -51,7 +51,7 @@ def validateCache(cacheID, passcode):
     return False
     
 def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
-    cacheID = generateDB.greatestCacheID() + 1
+    cacheID = int(generateDB.greatestCacheID() + 1)
     print cacheID
     Date = time.strftime("%d-%m-%Y")
     print Date
