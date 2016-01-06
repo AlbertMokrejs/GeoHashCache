@@ -142,7 +142,14 @@ def cacheProfile( uid = 0):
 		else:
 		 	return redirect("/validatecache/" + uid + "/" + request.form["validID"])
         
-        
+
+@app.route("/redircache/<cacheID>")
+def redirCache(cacheID = 0):
+	if "validID" in request.form.keys():
+		return redirect("/validatecache/" + cacheID + "/" + request.form["validID"])
+	else:
+		return redirect("/validatecache/" + cacheID + "/" + 0)
+
 @app.route("/validatecache/<cacheID>/<validID>")
 def cache(cacheID = 0, validID = 0):
 	result = utils.validateCache(cacheID, validID)
