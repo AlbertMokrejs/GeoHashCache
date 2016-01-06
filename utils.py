@@ -40,7 +40,8 @@ def genNewCoord(cacheID,small):
     WHERE caches.Cacheid = %s;
     """ % (cacheID)
     result = c.execute(q)
-    return geohash.geoHash(result[0],result[1],small)
+    for r in result:
+        return geohash.geoHash(r[0],r[1],small)
     
 def validateCache(cacheID, passcode):
     conn = sqlite3.connect("GeoHashCache.db")
