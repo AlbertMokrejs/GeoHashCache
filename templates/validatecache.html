@@ -25,8 +25,8 @@
 <input type="submit" style="color:red" name="status" value="status">
 </p>
 </form><br><br>
-<form method="POST">
-  <p>Found this cache? Validate it: <input type="text" name="validID" value="validID"> <input type="submit" name="Validate" value="submit"></p>
+<form method="POST" action={{cacheID}} >
+  <p>Found this cache? Validate it: <input type="text" name="validID" value="validID"> <input type="submit" name="submit" value="Validate"></p>
 </form>
 {% endif %}
 </br></br>
