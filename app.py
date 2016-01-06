@@ -144,7 +144,7 @@ def cacheProfile( uid = 0):
         
         
 @app.route("/validateCache/<cacheID>/<validID>")
-def validateCache(cacheID = 0, validID = 0):
+def cache(cacheID = 0, validID = 0):
 	result = utils.validateCache(cacheID, validID)
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
