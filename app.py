@@ -145,7 +145,7 @@ def cacheProfile( uid = 0):
         
 @app.route("/validateCache/<cacheID>/<validID>")
 def validateCache(cacheID = 0, validID = 0):
-	request = urllib2.urlopen("/checkCache/" + cacheID + "/" + validID)
+	request = urllib2.urlopen("localhost:8000/checkCache/" + cacheID + "/" + validID)
 	result = request.read()
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
