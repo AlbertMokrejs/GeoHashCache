@@ -93,10 +93,10 @@ def foundCache():
 			Type = request.form['Type']
 			Description = request.form['Desc']
 			Name = request.form["Name"]
-			newID = float(int(utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)))
+			BODGE = float(int(utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)))
 			print sys.exc_info()[0]
-			IMG = utils.makeQR(newID)[0]
-			validID = utils.makeQR(newID)[1] 
+			IMG = utils.makeQR(BODGE[0],BODGE[1])[0]
+			validID = utils.makeQR(BODGE[0],BODGE[1])[1] 
 			print sys.exc_info()[0]
 			return render_template("found.html", name = Name, IMG = IMG, validID = validID, Username = session["user"])
 		except:
