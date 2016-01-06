@@ -184,9 +184,11 @@ table {
     border-spacing: 0;
     border-collapse: collapse;
 }
-td,
+td {
+    padding: 10;
+}
 th {
-    padding: 0;
+    padding: 10;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
@@ -4176,10 +4178,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand {
     float: left;
-    height: 50px;
-    padding: 15px 15px;
+    height: 200px;
+    padding: 30px 30px;
     font-size: 18px;
-    line-height: 20px;
+    line-height: 200px;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {

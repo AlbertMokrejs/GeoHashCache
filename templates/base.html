@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +10,7 @@
 
     {% block title %}
     {% endblock %}
-
+    
     <!-- Bootstrap Core CSS -->
     <link href="../static/styles/css/bootstrap.min.css" rel="stylesheet">
 
@@ -37,11 +36,13 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
+	      <br>
                 <li class="sidebar-brand">
                     <a href="#">
-                        GeoHashCache
+                        <img src="../static/images/GHC.png" onmouseover="this.src='../static/images/GHCshadow.png'" onmouseout="this.src='../static/images/GHC.png'" width="200" height="200">
                     </a>
                 </li>
+		<br><br><br><br><br><br><br><br>
 		{% if Username %}
 		<li>
 		  <a href="#">{{Username}}</a>
