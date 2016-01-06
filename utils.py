@@ -93,9 +93,11 @@ def makeQR(cacheID):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q = """SELECT * FROM cacheIDs WHERE Cacheid = %s""" % (cacheID)
+    print q
     result = c.execute(q)
     print result
     for r in result:
+        print "" + r[0] + ":" r[1]
         return ["https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=validateCache/" + cacheID + "/" + r[1],r[1]]
     return ["",""]
         
