@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}
+<title>GeoHashCache - Cache</title>
+{% endblock %}
+
+{% block row %}
+{% if data %}
+<br><br><center>
+<h1>{{data["name"]}}</h1>
+<h2>{{data["lat"]}} : {{data["lon"]}}</h2><br><br>
+<p>A {{data["type"]}} cache: {{data["desc"]}}.</p>
+<p>Founded by {{data["founder"]}} on {{data["date"]}}.</p><br><br>
+{% if Error %}
+<p style="color:green">{{Error}}</p>
+{% endif %}
+<p>Current status: {{data["stat"]}}</p><br><br>
+<form method="POST">
+<p>REPORT AS
+<select>
+  <option value="Lost" selected="selected">Lost</option>
+  <option value="Damaged">Damaged</option>
+</select>
+<input type="submit" style="color:red" name="status" value="status">
+</p>
+</form><br><br>
+<form method="POST">
+  <p>Found this cache? Validate it: <input type="text" name="validID" value="validID"> <input type="submit" name="Validate" value="submit"></p>
+</form>
+{% endif %}
+</br></br>
+
+<div class="col-lg-12">
+	<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+</div>	
+{% endblock %}
