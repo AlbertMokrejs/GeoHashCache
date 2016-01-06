@@ -111,7 +111,7 @@ def getCache(uid):
     q = """
     SELECT *
     FROM caches
-    WHERE uid = %s;
+    WHERE cacheID = %s;
     """ % (uid)
     result = c.execute(q)
     for r in result:
