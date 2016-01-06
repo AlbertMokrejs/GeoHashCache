@@ -91,7 +91,7 @@ def Comment(Parentid, Content, Author):
 def makeQR(cacheID):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q = """SELECT * FROM cacheIDs WHERE Cacheid = %s;""" % (cacheID)
+    q = """SELECT * FROM cacheIDs WHERE cacheIDs.Cacheid = %s;""" % (cacheID)
     print q
     result = c.execute(q)
     print result
