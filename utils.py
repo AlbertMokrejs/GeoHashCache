@@ -59,7 +59,7 @@ def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
     validID = int(str(int(hashed,16))[0:10])
     print validID
     generateDB.createCache(Latitude, Longitude, Type, Name, Description, cacheID, validID, Founder, Date)
-    return cacheID
+    return [cacheID,validID]
     
 def register(Uname,Pword):
     generateDB.createUser(Uname,Pword,generateDB.greatestUserID() + 1)
