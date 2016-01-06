@@ -3,6 +3,8 @@ import geohash
 import generateDB
 import hashlib
 import time
+import marshal
+import base64
 
 def authenticate(username,password):
     conn = sqlite3.connect("GeoHashCache.db")
@@ -43,10 +45,12 @@ def genNewCoord(cacheID,small):
 def validateCache(cacheID, passcode):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q = """SELECT * FROM cacheIDs WHERE cacheIDs.Cacheid = %s;""" % (cacheID)
+    q = """SELECT Cacheid,Validid FROM caches
+    WHERE caches.Cacheid = %s;
+    """ % (cacheID)
     result = c.execute(q)
     for r in result:
-        if r[1] == passcode:
+        if r[1] == passcode and r[0] == cacheID:
             return True
     return False
     
