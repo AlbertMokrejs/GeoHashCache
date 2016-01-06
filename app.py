@@ -169,7 +169,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", data = data, Error = "Succesfully Validated", Username = session["user"])
+	  		return render_template("validatecache.html", cacheID = "/redircache/" + cacheID, data = data, Error = "Succesfully Validated", Username = session["user"])
 		else:	
 			data = utils.getCache(cacheID)
 			## TEMPORARY
@@ -181,7 +181,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", data = data, Error = "Failed To Validate", Username = session["user"])
+	  		return render_template("validatecache.html", cacheID = "/redircache/" + cacheID, data = data, Error = "Failed To Validate", Username = session["user"])
 	
 ## ------ app.py API code, accessed only by local file -------- ##
 
