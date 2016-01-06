@@ -140,7 +140,7 @@ def cacheProfile( uid = 0):
 				data["stat"] = "Damaged"
 		 	return render_template( "cache.html", data = data, Error = "Report Processed", Username = session["user"])
 		else:
-		 	return redirect("/validateCache/" + uid + "/" + request.form["validID"])
+		 	return redirect("/validatecache/" + uid + "/" + request.form["validID"])
         
         
 @app.route("/validatecache/<cacheID>/<validID>")
