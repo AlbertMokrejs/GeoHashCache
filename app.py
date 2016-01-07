@@ -10,6 +10,8 @@ import generateDB
 import utils
 import geohash
 
+from .geodata import get_geodata
+
 generateDB.checkGenerate()
 
 
@@ -181,8 +183,12 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Damaged"
 	  		return render_template("validatecache.html", cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = Error, Username = session["user"])
 
-@app.route("/find/<latitude>/<longitude>")
-def localCache(latitude = 0, longitude = 0):
+@app.route("/find")
+def localCache():
+	ip_address = request.access_route[0] or request.remote_addr
+    	geodata = get_geodata(ip_address)
+    	latitude=geodata.get("latitude"),
+        longitude=geodata.get("longitude"),
 	data = utils.cachesNear(latitude, longitude)
 	LocList = []
 	for r in data:
