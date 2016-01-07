@@ -143,10 +143,15 @@ def cacheProfile( uid = 0):
 		 	return redirect("/validatecache/" + uid + "/" + request.form["validID"])
         
 
-@app.route("/validatecache/<cacheID>/<validID>",methods=["GET","POST"])
+@app.route("/redircache/<cacheID>")
+def redirCache(cacheID = 0):
+	if "validID" in request.form.keys():
+		return redirect("/validatecache/" + cacheID + "/" + request.form["validID"])
+	else:
+		return redirect("/validatecache/" + cacheID + "/" + 0)
+
+@app.route("/validatecache/<cacheID>/<validID>")
 def cache(cacheID = 0, validID = 0):
-	if request.method=="POST":
-		validID=request.form["validID"]
 	result = utils.validateCache(cacheID, validID)
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
@@ -164,7 +169,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = "Succesfully Validated", Username = session["user"])
+	  		return render_template("validatecache.html", cacheID = "/redircache/" + cacheID, data = data, Error = "Succesfully Validated", Username = session["user"])
 		else:	
 			data = utils.getCache(cacheID)
 			## TEMPORARY
@@ -176,7 +181,15 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = "Failed To Validate", Username = session["user"])
+	  		return render_template("validatecache.html", cacheID = "/redircache/" + cacheID, data = data, Error = "Failed To Validate", Username = session["user"])
+
+@app.route("/find/<latitude>/<longitude>")
+def localCache(latitude = 0, longitude = 0):
+	data = utils.cachesNear(latitude, longitude)
+	LocList = []
+	for r in data:
+		LocList.append(['<a href="/validatecache/' + r[1] +'/0">' r[0][0] + '</a>', r[0][1], r[0][2]])
+	
 	
 ## ------ app.py API code, accessed only by local file -------- ##
 
