@@ -28,8 +28,9 @@ def updateCache(cacheID, lat, lon, Type, name, desc, stat):
     Type = '%s',
     Name = '%s',
     Description = '%s', Status = %s
-    WHERE caches.Cacheid = %s;""" % (lat, lon, Type, name, desc, stat, cacheID)
+    WHERE abs(caches.Cacheid - %s)<0.9;""" % (lat, lon, Type, name, desc, stat, cacheID)
     c.execute(q)
+    conn.commit()
     
 def genNewCoord(cacheID,small):
     conn = sqlite3.connect("GeoHashCache.db")
@@ -51,6 +52,7 @@ def validateCache(cacheID, passcode):
     """ % (cacheID)
     result = c.execute(q)
     for r in result:
+        print r[0] + "/" + r[1]
         if r[1] == passcode and r[0] == cacheID:
             return True
     return False
@@ -84,12 +86,13 @@ def setProfile(uid,blob):
         SET Profile = '%s'
         WHERE login.Uid = %s;""" % (base64.b64encode(marshal.dumps(blob)),uid)
     c.execute(q)
+    conn.commit()
 
 def appendProfile(uid,blob):
     setProfile(uid, getProfile(uid) + blob)
 
 def Comment(Parentid, Content, Author):
-    Commentid = lowestCommentID() - 1
+    Commentid = generateDB.lowestCommentID() - 1
     Date = time.strftime("%d-%m-%Y")
     generateDB.createComment(Parentid, Commentid, Content, Date, Author)
     
@@ -102,12 +105,12 @@ def cachesNear(lat, lon):
     q = """
     SELECT *
     FROM caches
-    WHERE abs(caches.Latitude - %s) < 1, abs(caches.Longitude - %s) < 1;
+    WHERE abs(caches.Latitude - %s) < 1 AND abs(caches.Longitude - %s) < 1;
     """ % (lat, lon)
     result = c.execute(q)
     final = []
     for r in result:
-        final.append([r[3],r[0],r[1]],r[5])
+        final.append([[r[3],r[0],r[1]],int(r[5])])
     return final
 
 def getCache(uid):
@@ -126,7 +129,7 @@ def getCache(uid):
         final["type"] = r[2]
         final["name"] = r[3]
         final["desc"] = r[4]
-        final["id"] = r[5]
+        final["id"] = int(r[5])
         final["founder"] = r[7]
         final["date"] = r[8]
         final["stat"] = r[9]
