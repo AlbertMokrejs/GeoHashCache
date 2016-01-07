@@ -28,7 +28,7 @@ def updateCache(cacheID, lat, lon, Type, name, desc, stat):
     Type = '%s',
     Name = '%s',
     Description = '%s', Status = %s
-    WHERE abs(caches.Cacheid - %s)<0.9;""" % (lat, lon, Type, name, desc, stat, cacheID)
+    WHERE caches.Cacheid = %s;""" % (lat, lon, Type, name, desc, stat, cacheID)
     c.execute(q)
     conn.commit()
     
@@ -50,6 +50,7 @@ def validateCache(cacheID, passcode):
     q = """SELECT Cacheid,Validid FROM caches
     WHERE caches.Cacheid = %s;
     """ % (cacheID)
+    print q
     result = c.execute(q)
     for r in result:
         print r[0] + "/" + r[1]
