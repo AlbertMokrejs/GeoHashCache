@@ -152,7 +152,7 @@ def redirCache(cacheID = 0):
 
 @app.route("/validatecache/<cacheID>/<validID>")
 def cache(cacheID = 0, validID = 0):
-	result = utils.validateCache(cacheID, validID)
+	result = utils.validateCache(int(cacheID), int(validID))
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
 		return redirect("/login")
@@ -189,6 +189,7 @@ def localCache(latitude = 0, longitude = 0):
 	LocList = []
 	for r in data:
 		LocList.append(['<a href="/validatecache/' + r[1] +'/0">' r[0][0] + '</a>', r[0][1], r[0][2]])
+	return render_template("find.html", LocList = LocList Username = session["user"])
 	
 	
 ## ------ app.py API code, accessed only by local file -------- ##
