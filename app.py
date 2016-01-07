@@ -143,15 +143,10 @@ def cacheProfile( uid = 0):
 		 	return redirect("/validatecache/" + uid + "/" + request.form["validID"])
         
 
-@app.route("/redircache/<cacheID>")
-def redirCache(cacheID = 0):
-	if "validID" in request.form.keys():
-		return redirect("/validatecache/" + cacheID + "/" + request.form["validID"])
-	else:
-		return redirect("/validatecache/" + cacheID + "/" + 0)
-
-@app.route("/validatecache/<cacheID>/<validID>")
+@app.route("/validatecache/<cacheID>/<validID>",methods=["GET","POST"])
 def cache(cacheID = 0, validID = 0):
+	if request.method=="POST":
+		validID=request.form["validID"]
 	result = utils.validateCache(cacheID, validID)
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
@@ -169,7 +164,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", cacheID = "/redircache/" + cacheID, data = data, Error = "Succesfully Validated", Username = session["user"])
+	  		return render_template("validatecache.html", cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = "Succesfully Validated", Username = session["user"])
 		else:	
 			data = utils.getCache(cacheID)
 			## TEMPORARY
@@ -181,7 +176,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", cacheID = "/redircache/" + cacheID, data = data, Error = "Failed To Validate", Username = session["user"])
+	  		return render_template("validatecache.html", cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = "Failed To Validate", Username = session["user"])
 	
 ## ------ app.py API code, accessed only by local file -------- ##
 
