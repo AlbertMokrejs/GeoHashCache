@@ -60,7 +60,23 @@ def registerPage():
         else:
         	uname = request.form['username']
         	pword = request.form['password']
-        	if pword == request.form["confirm"]:
+        	valid = (pword == request.form["confirm"])
+        	error = ""
+        	if not valid:
+        		error = "Passwords do not match"
+        	valid = valid and len(pword) < 8
+        	if not valid:
+        		error = "Passwords are too short"
+        	valid = valid and any(a for a in pword if a in """@;!'"?\\""")
+        	if not valid:
+        		error = """The following symbols are not allowed in passwords: @;.,!'"?\\"""
+        	valid = valid and len(uname) < 8
+        	if not valid:
+        		error = "Passwords are too short"
+        	valid = valid and any(a for a in uname if a in """@;!'"?\\""")
+        	if not valid:
+        		error = """The following symbols are not allowed in usernames: @;.,!'"?\\"""
+        	if valid:
         		utils.register(uname,pword)
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
@@ -70,7 +86,6 @@ def registerPage():
         	else:
             		session["user"] = ""
             		session["uid"] = -1
-            		error = "Passwords do not match"
             		return render_template("register.html",error=error)
 
 
