@@ -204,7 +204,7 @@ def localCache():
     	geodata = get_geodata(ip_address)
     	latitude=geodata.get("latitude"),
         longitude=geodata.get("longitude"),
-	data = utils.cachesNear(latitude, longitude)
+	data = utils.cachesNear(float(latitude), float(longitude))
 	LocList = []
 	for r in data:
 		LocList.append(['<a href="/validatecache/' + r[1] +'/0">' + r[0][0] + '</a>', r[0][1], r[0][2]])
