@@ -64,16 +64,16 @@ def registerPage():
         	error = ""
         	if not valid:
         		error = "Passwords do not match"
-        	valid = valid and len(pword) < 8
+        	valid = valid and not len(pword) < 8
         	if not valid:
         		error = "Passwords are too short"
-        	valid = valid and any(a for a in pword if a in """@;!'"?\\""")
+        	valid = valid and not any(a for a in pword if a in """@;!'"?\\""")
         	if not valid:
         		error = """The following symbols are not allowed in passwords: @;.,!'"?\\"""
-        	valid = valid and len(uname) < 8
+        	valid = valid and not len(uname) < 8
         	if not valid:
         		error = "Passwords are too short"
-        	valid = valid and any(a for a in uname if a in """@;!'"?\\""")
+        	valid = valid and not any(a for a in uname if a in """@;!'"?\\""")
         	if not valid:
         		error = """The following symbols are not allowed in usernames: @;.,!'"?\\"""
         	if valid:
