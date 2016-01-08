@@ -193,7 +193,7 @@ def localCache():
 	LocList = []
 	for r in data:
 		LocList.append(['<a href="/validatecache/' + r[1] +'/0">' + r[0][0] + '</a>', r[0][1], r[0][2]])
-	return render_template("find.html", LocList = LocList Username = session["user"])
+	return render_template("find.html", LocList = LocList, Username = session["user"])
 	
 	
 ## ------ app.py API code, accessed only by local file -------- ##
