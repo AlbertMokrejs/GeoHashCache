@@ -202,8 +202,10 @@ def cache(cacheID = 0, validID = 0):
 def localCache():
 	ip_address = request.access_route[0] or request.remote_addr
     	geodata = get_geodata(ip_address)
-    	latitude=geodata.get("latitude"),
-        longitude=geodata.get("longitude"),
+    	latitude=geodata.get("latitude")
+        longitude=geodata.get("longitude")
+        print latitude 
+        print longitude
 	data = utils.cachesNear(float(latitude), float(longitude))
 	LocList = []
 	for r in data:
