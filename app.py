@@ -10,7 +10,7 @@ import generateDB
 import utils
 import geohash
 
-from .geodata import get_geodata
+from geodata import get_geodata
 
 generateDB.checkGenerate()
 
