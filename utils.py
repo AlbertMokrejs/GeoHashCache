@@ -19,6 +19,18 @@ def authenticate(username,password):
             return [True, r[2]]
     return [False, -1]
     
+def findUser(username):
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q = """
+    SELECT *
+    FROM login
+    WHERE login.Username = '%s';""" % (username)
+    result = c.execute(q)
+    for r in result:
+        return True
+    return False
+    
 def updateCache(cacheID, lat, lon, Type, name, desc, stat):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
