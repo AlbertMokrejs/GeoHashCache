@@ -67,15 +67,15 @@ def registerPage():
         	valid = valid and not len(pword) < 8
         	if not valid:
         		error = "Passwords are too short"
-        	valid = valid and not any(a for a in pword if a in """@;!'"?\\""")
+        	valid = valid and not any(a for a in pword if a in """@;!'"?""")
         	if not valid:
-        		error = """The following symbols are not allowed in passwords: @;.,!'"?\\"""
+        		error = """The following symbols are not allowed in passwords: @;.,!'"?"""
         	valid = valid and not len(uname) < 8
         	if not valid:
         		error = "Passwords are too short"
-        	valid = valid and not any(a for a in uname if a in """@;!'"?\\""")
+        	valid = valid and not any(a for a in uname if a in """@;!'"?""")
         	if not valid:
-        		error = """The following symbols are not allowed in usernames: @;.,!'"?\\"""
+        		error = """The following symbols are not allowed in usernames: @;.,!'"?"""
         	if valid:
         		utils.register(uname,pword)
         		session["user"] = uname
