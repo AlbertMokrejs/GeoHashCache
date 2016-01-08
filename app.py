@@ -163,7 +163,7 @@ def cacheProfile( uid = 0):
 @app.route("/validatecache/<cacheID>/<validID>", methods=["GET","POST"])
 def cache(cacheID = 0, validID = 0):
 	if request.method=="POST":
- +		validID=request.form["validID"]
+		validID=request.form["validID"]
 	result = utils.validateCache(int(cacheID), int(validID))
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
