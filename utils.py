@@ -62,10 +62,8 @@ def validateCache(cacheID, passcode):
     q = """SELECT Cacheid,Validid FROM caches
     WHERE caches.Cacheid = %s;
     """ % (cacheID)
-    print q
     result = c.execute(q)
     for r in result:
-        print r[0] + "/" + r[1]
         if r[1] == passcode and r[0] == cacheID:
             return True
     return False
