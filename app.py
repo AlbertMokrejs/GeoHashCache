@@ -202,13 +202,11 @@ def localCache():
     	geodata = get_geodata(ip_address)
     	latitude=geodata.get("latitude")
         longitude=geodata.get("longitude")
-        print latitude 
-        print longitude
 	data = utils.cachesNear(float(latitude), float(longitude))
 	LocList = []
 	for r in data:
 		LocList.append(['<a href="/validatecache/' + str(r[1]) +'/0">' + str(r[0][0]) + '</a>', r[0][1], r[0][2]])
-	return render_template("find.html", LocList = LocList, Username = session["user"], Lat = latitude, Lon = longitude)
+	return render_template("find.html", LocList = LocList, Username = session["user"], Lon = latitude, Lat = longitude)
 	
 	
 ## ------ app.py API code, accessed only by local file -------- ##
