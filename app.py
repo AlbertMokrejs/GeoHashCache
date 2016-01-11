@@ -1,21 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from random import randint
+from geodata import get_geodata
 import sqlite3
 import sys
-from random import randint
-
 import urllib2
 import json
-
 import generateDB
 import utils
 import geohash
 
-from geodata import get_geodata
+
 
 generateDB.checkGenerate()
 
 
-##
 ##
 ##
 
@@ -209,7 +207,7 @@ def localCache():
 	data = utils.cachesNear(float(latitude), float(longitude))
 	LocList = []
 	for r in data:
-		LocList.append(['<a href="/validatecache/' + r[1] +'/0">' + r[0][0] + '</a>', r[0][1], r[0][2]])
+		LocList.append(['<a href="/validatecache/' + str(r[1]) +'/0">' + str(r[0][0]) + '</a>', r[0][1], r[0][2]])
 	return render_template("find.html", LocList = LocList, Username = session["user"], Lat = latitude, Lon = longitude)
 	
 	
