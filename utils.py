@@ -95,7 +95,7 @@ def setProfile(uid,blob):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q = """UPDATE login
-        SET Profile = %s
+        SET Profile = '%s'
         WHERE login.Uid = %s;""" % (base64.b64encode(marshal.dumps(blob)),uid)
     c.execute(q)
     conn.commit()
