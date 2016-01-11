@@ -88,13 +88,14 @@ def getProfile(uid):
     q = """SELECT * FROM login WHERE login.Uid = %s;""" % (uid)
     result = c.execute(q)
     for r in result:
+        print marshal.loads(base64.b64decode(r[3]))
         return marshal.loads(base64.b64decode(r[3]))
 
 def setProfile(uid,blob):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
     q = """UPDATE login
-        SET Profile = '%s'
+        SET Profile = %s
         WHERE login.Uid = %s;""" % (base64.b64encode(marshal.dumps(blob)),uid)
     c.execute(q)
     conn.commit()
