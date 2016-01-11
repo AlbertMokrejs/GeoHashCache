@@ -26,6 +26,7 @@ def get_geodata(ip):
     try:
         response = urlopen(url).read()
         data = loads(response)
+        print data
     except Exception:
         pass
 
