@@ -198,14 +198,19 @@ def cache(cacheID = 0, validID = 0):
 
 @app.route("/find")
 def localCache():
-	ip_address = request.access_route[0] or request.remote_addr
+	ip_address = request.access_route[0] 
+	#or request.remote_addr
+	print ip_address
     	geodata = get_geodata(ip_address)
     	latitude=geodata.get("latitude")
         longitude=geodata.get("longitude")
+        print latitude
+        print longitude
 	data = utils.cachesNear(float(latitude), float(longitude))
 	LocList = []
 	for r in data:
 		LocList.append(['<a href="/validatecache/' + str(r[1]) +'/0">' + str(r[0][0]) + '</a>', r[0][1], r[0][2]])
+	print LocList
 	return render_template("find.html", LocList = LocList, Username = session["user"], Lon = latitude, Lat = longitude)
 	
 	
