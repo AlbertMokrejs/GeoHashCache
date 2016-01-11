@@ -11,9 +11,9 @@ Geohashing Augmented Geocaching
 
 ## Timeline:
 
-* 1/6: Fix current bugs (Dammit HTML)
-* 1/7: Google Maps integration for nearby caches
-* 1/9: Work on QR-code compabatibility/Validating caches
+* 1/6: **X** Fix current bugs (Dammit HTML)
+* 1/7: **X** Google Maps integration for nearby caches
+* 1/9: **X** Work on QR-code compabatibility/Validating caches
 * 1/10: Enable user profiles + Upgrade login system
 * 1/12: Add comments to caches, work on reporting system.
 * 1/14: Add emails to user profiles/registering: add email notifications.
