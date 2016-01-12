@@ -188,7 +188,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = "Succesfully Validated", Username = session["user"])
+	  		return render_template("validatecache.html", valid = True, cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = "Succesfully Validated", Username = session["user"])
 		else:	
 			data = utils.getCache(cacheID)
 			Error = "Failed To Validate"
@@ -203,7 +203,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = Error, Username = session["user"])
+	  		return render_template("validatecache.html", valid = False, cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = Error, Username = session["user"])
 
 @app.route("/find")
 def localCache():
