@@ -13,7 +13,11 @@
 		<p>A {{data["type"]}} cache: {{data["desc"]}}.</p>
 		<p>Founded by {{data["founder"]}} on {{data["date"]}}.</p><br><br>
 		{% if Error %}
-			<p style="color:green">{{Error}}</p>
+			{% if valid %}
+				<p style="color:green">{{Error}}</p>
+			{% else %}
+				<p style="color:red">{{Error}}</p>
+			{% endif %}
 		{% endif %}
 		<p>Current status: {{data["stat"]}}</p><br><br>
 		<form method="POST">
@@ -30,6 +34,11 @@
 		</form>
 	{% endif %}
 	</br></br>
+	{% if valid %}
+		<form method="POST">
+			
+		</form>
+	{% endif %}
 
 	<div class="col-lg-12">
 		<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
