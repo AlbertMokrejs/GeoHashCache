@@ -19,6 +19,7 @@ def authenticate(username,password):
             Date = time.strftime("%d-%m-%Y")
             q = """UPDATE login SET login.Last = '%s' WHERE login.Username = '%s';""" %(Date,username)
             c.execute(q)
+            conn.commit()
             return [True, r[2]]
     return [False, -1]
     
