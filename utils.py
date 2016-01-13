@@ -16,6 +16,9 @@ def authenticate(username,password):
     result = c.execute(q)
     for r in result:
         if r[1] == password:
+            Date = time.strftime("%d-%m-%Y")
+            q = """UPDATE login SET login.Last = '%s' WHERE login.Username = '%s';""" %(Date,username)
+            c.execute(q)
             return [True, r[2]]
     return [False, -1]
     
@@ -92,8 +95,8 @@ def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
     generateDB.createCache(Latitude, Longitude, Type, Name, Description, cacheID, validID, Founder, Date)
     return [cacheID,validID]
     
-def register(Uname,Pword):
-    generateDB.createUser(Uname,Pword,generateDB.greatestUserID() + 1)
+def register(Uname,Pword,email):
+    generateDB.createUser(Uname,Pword,generateDB.greatestUserID() + 1,email,time.strftime("%d-%m-%Y"))
     
 def getProfile(uid):
     conn = sqlite3.connect("GeoHashCache.db")
