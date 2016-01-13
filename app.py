@@ -221,6 +221,18 @@ def localCache():
 		LocList.append(['<a href="/validatecache/' + str(r[1]) +'/0">' + str(r[0][0]) + '</a>', r[0][1], r[0][2]])
 	print LocList
 	return render_template("find.html", LocList = LocList, Username = session["user"], Lon = latitude, Lat = longitude)
+
+@app.route("/user/<user>")
+def userProfiles(user = 0):
+	if not str(user).isdigits():
+		user = utils.getUserID()
+	data = utils.getProfile(user)
+	if data[0][0] == "ERRORCODE":
+		Error = "Invalid User Account"
+		return render_template("user.html", Error = Error, Username = session["user"])
+	else:
+		return render_template("user.html", Data = Data, Username = session["user"])
+	
 	
 	
 ## ------ app.py API code, accessed only by local file -------- ##
