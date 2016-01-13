@@ -22,6 +22,8 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 def home():
+	if not "user" in session.keys():
+		session["user"] = ""
 	if "user" in session.keys() and "uid" in session.keys():
 		return render_template("home.html", Username = session["user"])
 	return render_template("home.html")
@@ -58,6 +60,7 @@ def registerPage():
         else:
         	uname = request.form['username']
         	pword = request.form['password']
+        	email = request.form['email']
         	valid = (pword == request.form["confirm"])
         	error = ""
         	if not valid:
@@ -75,9 +78,10 @@ def registerPage():
         	if not valid:
         		error = """The following symbols are not allowed in usernames: @;.,!'"?"""
         	if valid:
-        		utils.register(uname,pword)
+        		utils.register(uname,pword,email)
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
+        		session["email"] = email
         		if 'redir' in locals():
         			return redirect(redir)
         		return redirect("/home")
@@ -91,6 +95,7 @@ def registerPage():
 def logout():
 	session["user"] = ""
 	session["uid"] = -1
+	session["email"] = ""
 	return redirect("/home")
 	
 @app.route("/found",methods=["GET","POST"])
