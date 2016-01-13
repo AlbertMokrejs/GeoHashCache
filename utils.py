@@ -90,6 +90,7 @@ def getProfile(uid):
     for r in result:
         print marshal.loads(base64.b64decode(r[3]))
         return marshal.loads(base64.b64decode(r[3]))
+    return [["ERRORCODE",0,0]]
 
 def setProfile(uid,blob):
     conn = sqlite3.connect("GeoHashCache.db")
