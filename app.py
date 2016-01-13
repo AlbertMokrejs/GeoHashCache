@@ -170,7 +170,7 @@ def cache(cacheID = 0, validID = 0):
 			if "Lost" in request.form.keys():
 				stat = 2
 			data = utils.getCache(cacheID)
-			updateCache(cacheID, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
+			utils.updateCache(cacheID, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
 	result = utils.validateCache(int(cacheID), int(validID))
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
