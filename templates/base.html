@@ -47,12 +47,14 @@
                 </li>
 		<br><br><br><br><br><br><br><br>
 		{% if Username %}
+		{% if Username != "" %}
 		<li>
 		  <a href="#">{{Username}}</a>
 		</li>
 		<li>
 		  <a href="/logout">Sign out</a>
 		</li>
+		{% endif %}
 		{% else %}
                 <li>
                     <a href="/login">Login</a>
