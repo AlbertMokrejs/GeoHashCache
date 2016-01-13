@@ -18,7 +18,9 @@ def checkGenerate():
       Username TEXT,
       Password TEXT,
       Uid REAL,
-      Profile BLOB
+      Profile BLOB,
+      Email TEXT,
+      Last TEXT
    );""","""CREATE TABLE caches(
       Latitude REAL, 
       Longitude REAL,
@@ -92,10 +94,10 @@ def greatestUserID():
             x = r[2]
     return x
 
-def createUser(username,password,uid):
+def createUser(username,password,uid,email,date):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
-    q = """insert into login values ('%s','%s',%s,'%s');""" % (username,password,uid,base64.b64encode(str(marshal.dumps([]))) )
+    q = """insert into login values ('%s','%s',%s,'%s','%s','%s');""" % (username,password,uid,base64.b64encode(str(marshal.dumps([]))),email,date )
     c.execute(q)
     conn.commit()
     
