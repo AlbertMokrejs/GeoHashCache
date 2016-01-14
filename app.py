@@ -9,14 +9,7 @@ import generateDB
 import utils
 import geohash
 
-
-
 generateDB.checkGenerate("0")
-
-
-##
-##
-
 app = Flask(__name__)
 
 @app.route("/")
@@ -30,6 +23,9 @@ def home():
 	
 @app.route("/login",methods=["GET","POST"])
 def login():
+	session["user"] = ""
+        session["uid"] = -1
+        session["email"] = ""
 	if "redir" in session.keys() and session["redir"] != "":
         			redir = session["redir"]
         			session["redir"] = ""
@@ -41,12 +37,14 @@ def login():
         	if utils.authenticate(uname,pword)[0]:
         		session["user"] = uname
         		session["uid"] = utils.authenticate(uname,pword)[1]
+        		session["email"] = utils.authenticate(uname,pword)[2]
         		if "redir" in locals():
         			return redirect(redir)
         		return redirect("/home")
         	else:
             		session["user"] = ""
             		session["uid"] = -1
+            		session["email"] = ""
             		error = "Bad username or password"
             		return render_template("login.html",error=error)
 
@@ -92,6 +90,7 @@ def registerPage():
         	else:
             		session["user"] = ""
             		session["uid"] = -1
+            		session["email"] = ""
             		return render_template("register.html",error=error)
 
 
@@ -221,18 +220,13 @@ def cache(cacheID = 0, validID = 0):
 @app.route("/find")
 def localCache():
 	ip_address = request.access_route[0] 
-	#or request.remote_addr
-	print ip_address
     	geodata = get_geodata(ip_address)
     	latitude=geodata.get("latitude")
         longitude=geodata.get("longitude")
-        print latitude
-        print longitude
 	data = utils.cachesNear(float(latitude), float(longitude))
 	LocList = []
 	for r in data:
 		LocList.append(['<a href="/validatecache/' + str(r[1]) +'/0">' + str(r[0][0]) + '</a>', r[0][1], r[0][2]])
-	print LocList
 	return render_template("find.html", LocList = LocList, Username = session["user"], Lon = latitude, Lat = longitude)
 
 @app.route("/user/<user>")
