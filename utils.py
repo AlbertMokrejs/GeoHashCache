@@ -68,6 +68,19 @@ def findUserID(username):
             return r[2]
     return 0
     
+def findUserData(username):
+    UID = findUserID(username)
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q = """
+    SELECT *
+    FROM login
+    WHERE login.Uid = %s;""" % (UID)
+    result = c.execute(q)
+    for r in result
+        return [r[0],r[1],r[2],r[4],r[5]]
+    return ["","",0,"",""]
+    
 def updateCache(cacheID, lat, lon, Type, name, desc, stat):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
