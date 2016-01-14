@@ -5,10 +5,25 @@ import marshal
 #Checks if there is a database. Makes one if there isn't.
 #
 #
-def checkGenerate():
+def checkGenerate(version):
    #Checks if there is a database file.
    x = os.path.isfile("GeoHashCache.db")
-   
+   if x:
+      connect = sqlite3.connect("GeoHashCache.db")
+      curs = connect.cursor()
+      q = """SELECT * FROM version;"""
+      result = curs.execute(q)
+      for r in result:
+         if r[0] != version:
+            x = False
+            List = ["""DROP TABLE GeoHashCache.login;""",
+               """DROP TABLE GeoHashCache.caches;""",
+               """DROP TABLE GeoHashCache.comments;""",
+               """DROP TABLE GeoHashCache.cacheIDs;""",
+               """DROP TABLE GeoHashCache.version;""",]
+            for z in list:
+               curs.execute(z)
+            connect.commit()
    if not x:
       #Makes tables.
       connect = sqlite3.connect("GeoHashCache.db")
@@ -43,7 +58,11 @@ def checkGenerate():
    """CREATE TABLE cacheIDs(
       Cacheid REAL,
       Validid REAL);
-   """]
+   ""","""
+   CREATE TABLE version(
+     version TEXT
+   );"""]
+      List.append("""insert into version values ('%s');""" % version)
       for q in List:
          curs.execute(q)
          connect.commit()
