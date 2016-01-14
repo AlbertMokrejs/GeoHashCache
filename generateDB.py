@@ -15,6 +15,7 @@ def checkGenerate(version):
       result = curs.execute(q)
       for r in result:
          if r[0] != version:
+            print "INVALID VERSION. \n WIPING AND UPDATING."
             x = False
             List = ["""DROP TABLE GeoHashCache.login;""",
                """DROP TABLE GeoHashCache.caches;""",
@@ -66,6 +67,7 @@ def checkGenerate(version):
       for q in List:
          curs.execute(q)
          connect.commit()
+      print "VERSION UP TO DATE"
 
 #Finds the ID of the latest Cache as IDs are sequential. 
 def greatestCacheID():
