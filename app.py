@@ -65,18 +65,22 @@ def registerPage():
         	error = ""
         	if not valid:
         		error = "Passwords do not match"
-        	valid = valid and not len(pword) < 8
-        	if not valid:
-        		error = "Passwords are too short"
-        	valid = valid and not any(a for a in pword if a in """@;!'"?""")
-        	if not valid:
-        		error = """The following symbols are not allowed in passwords: @;.,!'"?"""
-        	valid = valid and not len(uname) < 8
-        	if not valid:
-        		error = "Passwords are too short"
-        	valid = valid and not any(a for a in uname if a in """@;!'"?""")
-        	if not valid:
-        		error = """The following symbols are not allowed in usernames: @;.,!'"?"""
+        	if valid:
+        		valid = valid and not len(pword) < 8
+        		if not valid:
+        			error = "Passwords are too short"
+        		if valid:
+	        		valid = valid and not any(a for a in pword if a in """@;!'"?""")
+        			if not valid:
+        				error = """The following symbols are not allowed in passwords: @;.,!'"?"""
+        			if valid:
+        				valid = valid and not len(uname) < 8
+        				if not valid:
+        					error = "Passwords are too short"
+        				if valid:
+        					valid = valid and not any(a for a in uname if a in """@;!'"?""")
+        					if not valid:
+        						error = """The following symbols are not allowed in usernames: @;.,!'"?"""
         	if valid:
         		utils.register(uname,pword,email)
         		session["user"] = uname
@@ -234,9 +238,9 @@ def userProfiles(user = 0):
 	data = utils.getProfile(user)
 	if data[0][0] == "ERRORCODE":
 		Error = "Invalid User Account"
-		return render_template("user.html", Error = Error, Username = session["user"])
+		return render_template("user.html", user = user, Error = Error, Username = session["user"])
 	else:
-		return render_template("user.html", Data = Data, Username = session["user"])
+		return render_template("user.html", user = user, Data = Data, Username = session["user"])
 	
 	
 	
