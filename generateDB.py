@@ -24,7 +24,7 @@ def checkGenerate(version):
                """DROP TABLE GeoHashCache.version;""",]
             for z in list:
                curs.execute(z)
-            connect.commit()
+               connect.commit()
    if not x:
       #Makes tables.
       connect = sqlite3.connect("GeoHashCache.db")
@@ -63,7 +63,7 @@ def checkGenerate(version):
    CREATE TABLE version(
      version TEXT
    );"""]
-      List.append("""insert into version values ('%s');""" % version)
+      List.append("""insert into version values ('%s');""" % (version))
       for q in List:
          curs.execute(q)
          connect.commit()
