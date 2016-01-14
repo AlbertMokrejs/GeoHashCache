@@ -17,6 +17,8 @@ app = Flask(__name__)
 def home():
 	if not "user" in session.keys():
 		session["user"] = ""
+		session["uid"] = -1
+		session["email"] = ""
 	if "user" in session.keys() and "uid" in session.keys():
 		return render_template("home.html", Username = session["user"])
 	return render_template("home.html")
@@ -59,26 +61,30 @@ def registerPage():
         	uname = request.form['username']
         	pword = request.form['password']
         	email = request.form['email']
-        	valid = (pword == request.form["confirm"])
         	error = ""
+        	valid = not findUser(uname)
         	if not valid:
-        		error = "Passwords do not match"
+        		error = "This Username Is Taken."
+        	if valid:
+        		valid = (pword == request.form["confirm"])
+        		if not valid:
+        			error = "Passwords Do Not Match."
         	if valid:
         		valid = valid and not len(pword) < 8
         		if not valid:
-        			error = "Passwords are too short"
+        			error = "Passwords Are Too Short."
         		if valid:
 	        		valid = valid and not any(a for a in pword if a in """@;!'"?""")
         			if not valid:
-        				error = """The following symbols are not allowed in passwords: @;.,!'"?"""
+        				error = """The Following Symbols Are Mot Allowed In Passwords: @;.,!'"?"""
         			if valid:
         				valid = valid and not len(uname) < 8
         				if not valid:
-        					error = "Passwords are too short"
+        					error = "Username Is Too Short."
         				if valid:
         					valid = valid and not any(a for a in uname if a in """@;!'"?""")
         					if not valid:
-        						error = """The following symbols are not allowed in usernames: @;.,!'"?"""
+        						error = """The Following Symbols Are Mot Allowed In Usernames: @;.,!'"?"""
         	if valid:
         		utils.register(uname,pword,email)
         		session["user"] = uname
@@ -191,7 +197,6 @@ def cache(cacheID = 0, validID = 0):
 		if result:
 			data = utils.getCache(cacheID)
 			utils.appendProfile(session["uid"],[data["name"],data["lat"],data["lon"]])
-			## TEMPORARY
 			if data["stat"] == 0:
 				data["stat"] = "Normal"
 			if data["stat"] == 1:
@@ -206,7 +211,6 @@ def cache(cacheID = 0, validID = 0):
 			Error = "Failed To Validate"
 			if int(validID) == 0:
 				Error = ""
-			## TEMPORARY
 			if data["stat"] == 0:
 				data["stat"] = "Normal"
 			if data["stat"] == 1:
