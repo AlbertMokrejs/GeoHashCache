@@ -20,8 +20,8 @@ def authenticate(username,password):
             q = """UPDATE login SET Last = '%s' WHERE Username = '%s';""" %(Date,username)
             c.execute(q)
             conn.commit()
-            return [True, r[2]]
-    return [False, -1]
+            return [True, r[2],r[4]]
+    return [False, -1,""]
     
 def findUser(username):
     conn = sqlite3.connect("GeoHashCache.db")
