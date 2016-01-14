@@ -12,12 +12,12 @@ def authenticate(username,password):
     q = """
     SELECT *
     FROM login
-    WHERE login.Username = '%s';""" % (username)
+    WHERE Username = '%s';""" % (username)
     result = c.execute(q)
     for r in result:
         if r[1] == password:
             Date = time.strftime("%d-%m-%Y")
-            q = """UPDATE login SET login.Last = '%s' WHERE login.Username = '%s';""" %(Date,username)
+            q = """UPDATE login SET Last = '%s' WHERE Username = '%s';""" %(Date,username)
             c.execute(q)
             conn.commit()
             return [True, r[2]]
