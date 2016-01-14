@@ -179,6 +179,11 @@ def cache(cacheID = 0, validID = 0):
 			stat = 2
 		data = utils.getCache(cacheID)
 		utils.updateCache(cacheID, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
+		if "Comment" in request.form.keys():
+			Comment =request.form["Comment"]
+			if not ("user" in session.keys() and session["user"] != ""):
+				session["redir"] = "/validatecache/%s/%s" % (cacheID, validID)
+				return redirect("/login")
 	result = utils.validateCache(int(cacheID), int(validID))
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
