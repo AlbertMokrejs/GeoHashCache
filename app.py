@@ -172,14 +172,13 @@ def cache(cacheID = 0, validID = 0):
 	if request.method=="POST":
 		if "validID" in request.form.keys():
 			validID=request.form["validID"]
-		else:
-			stat = 0
-			if "Damaged" in request.form.keys():
-				stat = 3
-			if "Lost" in request.form.keys():
-				stat = 2
-			data = utils.getCache(cacheID)
-			utils.updateCache(cacheID, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
+		stat = 0
+		if "Damaged" in request.form.keys():
+			stat = 3
+		if "Lost" in request.form.keys():
+			stat = 2
+		data = utils.getCache(cacheID)
+		utils.updateCache(cacheID, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
 	result = utils.validateCache(int(cacheID), int(validID))
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
