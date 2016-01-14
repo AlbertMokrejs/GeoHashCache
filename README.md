@@ -16,7 +16,7 @@ Geohashing Augmented Geocaching
 * 1/09: **X** Work on QR-code compabatibility/Validating caches
 * 1/10: **X** Enable user profiles + Upgrade login system
 * 1/12: Add comments to caches, work on reporting system.
-* 1/14: Add emails to user profiles/registering: add email notifications.
+* 1/14: **X** Add emails to user profiles/registering: add email notifications.
 * 1/16: Stress Testing.
 * 1/18: Fix MISC bugs.
 
