@@ -11,7 +11,7 @@ import geohash
 
 
 
-generateDB.checkGenerate()
+generateDB.checkGenerate("0")
 
 
 ##
