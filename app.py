@@ -232,7 +232,7 @@ def localCache():
 
 @app.route("/user/<user>")
 def userProfiles(user = 0):
-	if not str(user).isdigits():
+	if not str(user).isdigit():
 		user = utils.getUserID()
 	data = utils.getProfile(user)
 	if data[0][0] == "ERRORCODE":
