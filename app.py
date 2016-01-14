@@ -240,7 +240,7 @@ def userProfiles(user = 0):
 	if not str(user).isdigit():
 		user = utils.findUserID(user)
 	data = utils.getProfile(user)
-	if data[0][0] == "ERRORCODE":
+	if len(data) > 0 and len(data[0]) > 0 and data[0][0] == "ERRORCODE":
 		Error = "Invalid User Account"
 		return render_template("user.html", user = user, Error = Error, Username = session["user"])
 	else:
