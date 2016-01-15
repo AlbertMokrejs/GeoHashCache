@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}
+    <title>GeoHashCache - Relocating a Cache</title>
+{% endblock %}
+
+
+
+{% block row %}
+{% if name and relocated %}
+    <br><br><center>
+    <p>Congratulations, you've successfully relocated {{name}}.</p>
+    </center></br></br>
+{% else %}
+    <br><br><center>
+    <form action="found" method="POST">
+        <!--Insert code for suggestions -->
+        <table class="table">
+            <tr>
+                <td>Enter latitude: </td>
+                <td><input type="text" name="Latitude" placeHolder="{{Lat}}" required/></td>
+            </tr>
+            <tr>
+                <td>Enter Longitude: </td> 
+                <td><input type="text" name="Longitude" placeHolder="{{Lon}}" required/></td>
+            </tr>
+            <tr>
+                <td>Enter a description for your Cache. This description should be informative and should contain the puzzle or clues for your puzzle cache if relevant. </td>
+                <td><input type="text" name="Desc" placeHolder=""></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    {% if Error %}
+                        <p>{{Error}}</p>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+        <input name="submit" type="submit" value="Submit" />
+    </form>
+</center></br></br>
+{% endif %}
+</br></br>
+
+<div class="col-lg-12">
+	<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+</div>	
+{% endblock %}
