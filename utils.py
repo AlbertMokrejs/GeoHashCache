@@ -42,7 +42,7 @@ def collectCache(uid,user,username):
     body = "Dear " + dataU[0] + ",\nYour cache, " + dataC["name"] + ", was found by " + username + """ today! The cache'll be moved promptly. 
     Meanwhile, why not spend a day GeoCaching yourself? \n Sincerely, The GeoHashCache Team."""
     recipient = dataU[3]
-    send_mail(dataU[4],subject,body)
+    send_email(dataU[4],subject,body)
 
 def authenticate(username,password):
     conn = sqlite3.connect("GeoHashCache.db")
