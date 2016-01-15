@@ -260,6 +260,7 @@ def moveCache(cacheID = 0, validID = 0):
 			newCord = geohash.geoHash(lat,lon,false)
 			return render_template("move.html", username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
 		if request.method=="POST":
+			
 		
 	
 	
