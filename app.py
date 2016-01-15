@@ -9,7 +9,7 @@ import generateDB
 import utils
 import geohash
 
-generateDB.checkGenerate("0")
+generateDB.checkGenerate("Pre-Alpha 1")
 app = Flask(__name__)
 
 @app.route("/")
@@ -205,7 +205,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", valid = True, cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = "Succesfully Validated", Username = session["user"])
+	  		return render_template("validatecache.html", CID = cacheID, VID = validID, valid = True, cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = "Succesfully Validated", Username = session["user"])
 		else:	
 			data = utils.getCache(cacheID)
 			Error = "Failed To Validate"
@@ -219,7 +219,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", valid = False, cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = Error, Username = session["user"])
+	  		return render_template("validatecache.html", CID = cacheID, VID = validID, valid = False, cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = Error, Username = session["user"])
 
 @app.route("/find")
 def localCache():
@@ -243,27 +243,16 @@ def userProfiles(user = 0):
 		return render_template("user.html", user = user, Error = Error, Username = session["user"])
 	else:
 		return render_template("user.html", user = user, Data = Data, Username = session["user"])
+		
+@app.route("/movecache/<cacheID>/<validID>", methods=["GET","POST"])
+def moveCache(cacheID = 0, validID = 0):
+	if not utils.validateCache(int(cacheID), int(validID)):
+		return redirect("/home")
 	
 	
-	
-## ------ app.py API code, accessed only by local file -------- ##
-
-
-@app.route("/moveCache/<cacheID>")
-def moveCache(cacheID = 0):
-	return utils.genNewCoord(cacheID, False)
-  
-
-@app.route("/closeMoveCache/<cacheID>")
-def moveCacheB(cacheID = 0):
-	return utils.genNewCoord(cacheID, True)
-	
-@app.route("/checkCache/<cacheID>/<validID>")
-def checkCache(cacheID = 0, validID = 0):
-	return utils.validateCache(cacheID, validID)
         
 
 if (__name__ == "__main__"):
         app.debug = True
-        app.secret_key = "secret"
+        app.secret_key = "app.secret_key"
         app.run(host='0.0.0.0', port=8000)
