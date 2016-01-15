@@ -249,6 +249,18 @@ def userProfiles(user = 0):
 def moveCache(cacheID = 0, validID = 0):
 	if not utils.validateCache(int(cacheID), int(validID)):
 		return redirect("/home")
+	if not ("user" in session.keys() and session["user"] != ""):
+		session["redir"] = "/movecache/%s/%s" % (cacheID, validID)
+		return redirect("/login")
+	else:
+		data = utils.getCache(cacheID)
+		lat = data["lat"]
+		lon = data["lon"]
+		if request.method=="GET":
+			newCord = geohash.geoHash(lat,lon,false)
+			return render_template("move.html", username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
+		if request.method=="POST":
+		
 	
 	
         
