@@ -86,7 +86,7 @@ def findUserData(username):
     FROM login
     WHERE login.Uid = %s;""" % (UID)
     result = c.execute(q)
-    for r in result
+    for r in result:
         return [r[0],r[1],r[2],r[4],r[5]]
     return ["","",0,"",""]
     
