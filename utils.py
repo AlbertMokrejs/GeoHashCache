@@ -10,7 +10,7 @@ import smtplib
 def validCoord(lat,lon):
     if(abs(lat) > 90 and abs(lon) > 90):
         print "Error: Invalid"
-        return [0,0]
+        return [9000,9000]
     if(abs(lat) > 90):
         print "Wrong Order: Correcting"
         return [lon,lat]
