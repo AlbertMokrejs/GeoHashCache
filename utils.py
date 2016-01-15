@@ -178,7 +178,7 @@ def Comment(Parentid, Content, Author):
     generateDB.createComment(Parentid, Commentid, Content, Date, Author)
     
 def makeQR(cacheID,validID):
-    return ["https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=validateCache/" + str(cacheID) + "/" + str(validID),validID]
+    return ["https://api.qrserver.com/v1/create-qr-code/?size=640x640&data=validateCache/" + str(cacheID) + "/" + str(validID),validID]
         
 def cachesNear(lat, lon):
     conn = sqlite3.connect("GeoHashCache.db")
