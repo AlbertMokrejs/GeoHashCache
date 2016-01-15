@@ -9,7 +9,7 @@ import generateDB
 import utils
 import geohash
 
-generateDB.checkGenerate("Pre-Alpha 1")
+generateDB.checkGenerate("Pre-Alpha 1.01")
 app = Flask(__name__)
 
 @app.route("/")
