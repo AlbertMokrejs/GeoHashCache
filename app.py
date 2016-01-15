@@ -197,6 +197,7 @@ def cache(cacheID = 0, validID = 0):
 		if result:
 			data = utils.getCache(cacheID)
 			utils.appendProfile(session["uid"],[data["name"],data["lat"],data["lon"]])
+			utils.collectCache(cacheID,data["founder"],session["user"])
 			if data["stat"] == 0:
 				data["stat"] = "Normal"
 			if data["stat"] == 1:
