@@ -182,7 +182,9 @@ def cache(cacheID = 0, validID = 0):
 			stat = 3
 		if "Lost" in request.form.keys():
 			stat = 2
+		print stat
 		data = utils.getCache(cacheID)
+		print data
 		utils.updateCache(cacheID, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
 		if "Comment" in request.form.keys():
 			Comment =request.form["Comment"]
@@ -256,11 +258,24 @@ def moveCache(cacheID = 0, validID = 0):
 		data = utils.getCache(cacheID)
 		lat = data["lat"]
 		lon = data["lon"]
+		newCord = geohash.geoHash(lat,lon,false)
 		if request.method=="GET":
-			newCord = geohash.geoHash(lat,lon,false)
 			return render_template("move.html", username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
 		if request.method=="POST":
-			print "fuck you"
+			lat = request.form["lat"]
+			lon = request.form["lon"]
+			cords = utils.validCoord(lat,lon)
+			lat = cords[0]
+			lon = cords[1]
+			if lat == 9000 or lon == 9000:
+				error = "INVALID COORDINATES"
+				return render_template("move.html", error = error, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
+			try:
+				desc = request.form["desc"]
+			except:
+				desc = data["desc"]
+			status = 1
+			utils.updateCache(cacheID, lat, lon, data["type"], data["name"], desc, status)
 		
 	
 	
