@@ -7,6 +7,15 @@ import marshal
 import base64
 import smtplib
 
+def validCoord(lat,lon):
+    if(abs(lat) > 90 and abs(lon) > 90):
+        print "Error: Invalid"
+        return [0,0]
+    if(abs(lat) > 90):
+        print "Wrong Order: Correcting"
+        return [lon,lat]
+    return [lat,lon]
+
 def send_email(recipient, subject, body):
     user = "GeoHashCache@gmail.com"
     pwd = "NuclearPotato"
