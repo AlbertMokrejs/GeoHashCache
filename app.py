@@ -62,7 +62,7 @@ def registerPage():
         	pword = request.form['password']
         	email = request.form['email']
         	error = ""
-        	valid = not findUser(uname)
+        	valid = not utils.findUser(uname)
         	if not valid:
         		error = "This Username Is Taken."
         	if valid:
