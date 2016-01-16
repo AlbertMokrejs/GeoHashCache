@@ -276,6 +276,10 @@ def moveCache(cacheID = 0, validID = 0):
 				desc = data["desc"]
 			status = 1
 			utils.updateCache(cacheID, lat, lon, data["type"], data["name"], desc, status)
+			
+@app.route("/about", methods=["GET","POST"])
+def about():
+	return render_templace("about.html", username = session["user"])
 		
 	
 	
