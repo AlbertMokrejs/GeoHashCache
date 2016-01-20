@@ -7,6 +7,11 @@ import marshal
 import base64
 import smtplib
 
+#------------------
+#Tests for the validity of the coordinates
+
+#Input: Latitude and Longitude
+#Output: Whether the coordinates are valid and returns 
 def validCoord(lat,lon):
     if(abs(lat) > 90 and abs(lon) > 90):
         print "Error: Invalid"
@@ -16,6 +21,10 @@ def validCoord(lat,lon):
         return [lon,lat]
     return [lat,lon]
 
+#Sends email receipt to the intended recipient
+
+#Input: Recipient email address, subject title, and body of email
+#Output: Sends email and, if applicable, error message.
 def send_email(recipient, subject, body):
     user = "GeoHashCache@gmail.com"
     pwd = "NuclearPotato"
@@ -34,7 +43,11 @@ def send_email(recipient, subject, body):
         server.close()
     except:
         print "error"
-        
+
+#Congratulations message
+
+#Input: User ID, intended user, and username
+#Output: Congratulatory message by team on the successful discovery of user's GeoCache
 def collectCache(uid,user,username):
     dataU = findUserData(user)
     dataC = getCache(uid)
@@ -44,6 +57,10 @@ def collectCache(uid,user,username):
     recipient = dataU[3]
     send_email(dataU[4],subject,body)
 
+#Login authentication into database of GeoCaches and user accounts
+
+#Input: Login credentials
+#Output: Boolean value indicating success and, if true, account information
 def authenticate(username,password):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -60,7 +77,11 @@ def authenticate(username,password):
             conn.commit()
             return [True, r[2],r[4]]
     return [False, -1,""]
-    
+
+#Quick way to find if username is already taken
+
+#Input: Username
+#Output: Presence of user in database (boolean)
 def findUser(username):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -72,7 +93,11 @@ def findUser(username):
     for r in result:
         return True
     return False
-    
+
+#Finding user ID attached to username
+
+#Input: Username
+#Output: User ID
 def findUserID(username):
     if findUser(username):
         conn = sqlite3.connect("GeoHashCache.db")
@@ -85,7 +110,11 @@ def findUserID(username):
         for r in result:
             return r[2]
     return 0
-    
+
+#Accessing actual user data
+
+#Input: Username
+#Output: Relevant user data under username
 def findUserData(username):
     UID = findUserID(username)
     conn = sqlite3.connect("GeoHashCache.db")
@@ -98,7 +127,11 @@ def findUserData(username):
     for r in result:
         return [r[0],r[1],r[2],r[4],r[5]]
     return ["","",0,"",""]
-    
+
+#Updating overall cache data in database
+
+#Input: Cache ID, latitude, longitude, name, description, and status
+#Ouput: None. Updates database
 def updateCache(cacheID, lat, lon, Type, name, desc, stat):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -111,7 +144,11 @@ def updateCache(cacheID, lat, lon, Type, name, desc, stat):
     WHERE caches.Cacheid = %s;""" % (lat, lon, Type, name, desc, stat, cacheID)
     c.execute(q)
     conn.commit()
-    
+
+#Generate coordinates based on cache ID in database
+
+#Input: Cache ID and type of cache
+#Output: Information relevant to cache
 def genNewCoord(cacheID,small):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -123,7 +160,11 @@ def genNewCoord(cacheID,small):
     result = c.execute(q)
     for r in result:
         return geohash.geoHash(r[0],r[1],small)
-    
+
+#Finds validity of cache according to passcode (authentication), if it is already taken or not
+
+#Input: cacheID and passcode
+#Output: Boolean value of availability
 def validateCache(cacheID, passcode):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -135,7 +176,11 @@ def validateCache(cacheID, passcode):
         if r[1] == passcode and r[0] == cacheID:
             return True
     return False
-    
+
+#Make a new cache and set a place for it in database
+
+#Input: Latitude, longitude, type of cache, name, short description, and the user/founder
+#Output: Creating database slot for said cache
 def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
     cacheID = int(generateDB.greatestCacheID() + 1)
     print cacheID
@@ -146,10 +191,18 @@ def makeNewCache(Latitude, Longitude, Type, Name, Description, Founder):
     print validID
     generateDB.createCache(Latitude, Longitude, Type, Name, Description, cacheID, validID, Founder, Date)
     return [cacheID,validID]
-    
+
+#Create new account
+
+#Input: Username, Password, email
+#Output: Generates database slot for account
 def register(Uname,Pword,email):
     generateDB.createUser(Uname,Pword,generateDB.greatestUserID() + 1,email,time.strftime("%d-%m-%Y"))
-    
+
+#Gets user's profile information based on user ID
+
+#Input: user ID
+#Output: User info
 def getProfile(uid):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -160,6 +213,10 @@ def getProfile(uid):
         return marshal.loads(base64.b64decode(r[3]))
     return [["ERRORCODE",0,0]]
 
+#Retreives profile from GeoHashCache database
+
+#Input: User ID
+#Output: N/A
 def setProfile(uid,blob):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -169,17 +226,33 @@ def setProfile(uid,blob):
     c.execute(q)
     conn.commit()
 
+#Retrieves profile from database using "setProfile"
+
+#Input: User ID
+#Output: Same as setProfile
 def appendProfile(uid,blob):
     setProfile(uid, getProfile(uid) + blob)
 
+#Insert comment into particular database slot for later access
+
+#Input: Parent ID, actual comment, and the author (user)
+#Output: Database slot generated, no graphical output.
 def Comment(Parentid, Content, Author):
     Commentid = generateDB.lowestCommentID() - 1
     Date = time.strftime("%d-%m-%Y")
     generateDB.createComment(Parentid, Commentid, Content, Date, Author)
-    
+
+#API connection with QR, checks for validity of cache
+
+#Input: Cache ID and a valid ID
+#Output: QR Server https link to said cache
 def makeQR(cacheID,validID):
     return ["https://api.qrserver.com/v1/create-qr-code/?size=640x640&data=validateCache/" + str(cacheID) + "/" + str(validID),validID]
-        
+
+#Finds local caches near a certain global location
+
+#Input: Latitude, Longitude
+#Output: Cache information array
 def cachesNear(lat, lon):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -194,6 +267,10 @@ def cachesNear(lat, lon):
         final.append([[r[3],r[0],r[1]],int(r[5])])
     return final
 
+#Get cache information based on user ID
+
+#Input: User ID
+#Output: Every bit of profile information about the cache
 def getCache(uid):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
