@@ -213,10 +213,10 @@ def getProfile(uid):
         return marshal.loads(base64.b64decode(r[3]))
     return [["ERRORCODE",0,0]]
 
-#Retreives profile from GeoHashCache database
+#Sets profile to GeoHashCache database
 
-#Input: User ID
-#Output: N/A
+#Input: User ID and potential random binary data
+#Output: Makes slot in database with user ID, filtering the random binaries
 def setProfile(uid,blob):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -226,10 +226,10 @@ def setProfile(uid,blob):
     c.execute(q)
     conn.commit()
 
-#Retrieves profile from database using "setProfile"
+#Appends profile onto database using "setProfile"
 
 #Input: User ID
-#Output: Same as setProfile
+#Output: Same as setProfile, except just adding onto the database
 def appendProfile(uid,blob):
     setProfile(uid, getProfile(uid) + blob)
 

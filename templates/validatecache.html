@@ -6,74 +6,75 @@
 {% endblock %}
 
 {% block row %}
-	{% if data %}
-		<br><br><center>
-		<table class="table">
-			<tr>
-				<td><h1>Cache Name: </h1></td>
-				<td><h1>{{data["name"]}}</h1></td>
-			</tr>
-			<tr>
-				<td><h2>Lat: {{data["lat"]}}</h2></td>
-				<td><h2>Lon: {{data["lon"]}}</h2></td>	
-			</tr>
-			<tr>
-				<td><p>Cache Type: </p></td>
-				<td><p>{{data["type"]}}</p></td>
-			</tr>
-			<tr>
-				<td>Description: </td>
-				<td><p>{{data["desc"]}}</p>.</td>
-			</tr>
-			<tr>
-				<td><p>Founder: </p></td>
-				<td><p>{{data["founder"]}}</p></td>
-			</tr>
-			<tr>
-				<td><p>Founded on: </p></td>
-				<td><p>{{data["date"]}}</p></td>
-			</tr>
-			{% if Error %}
-				<tr>
-					<td>Validation: </td>
-				{% if valid %}
-					<td><p style="color:green">{{Error}}</p></td>
-				{% else %}
-					<td><p style="color:red">{{Error}}</p></td>
-				{% endif %}
-				</tr>
-			{% endif %}
-			<tr>
-				<td><p>Current status: </td>
-				<td><p>{{data["stat"]}}</p></td>
-			</tr>
-			<tr>
-				<form method="POST">
-					<td><p>REPORT AS: </p></td>
-					<td>
-						<select>
-  							<option value="Lost" selected="selected">Lost</option>
-  							<option value="Damaged">Damaged</option>
-						</select>
-						<input type="submit" style="color:red" name="status" value="status">
-					</td>
-				</form>
-			</tr>
-			<tr>
-				{% if valid %}
-					<td><a href='/movecache/{{CID}}/{{VID}}' class="btn btn-default">Relocate</a></td>
-				{% else %}
-					<form method="POST" action={{cacheID}} >
-  						<td><p>Found this cache? Validate it: </p></td>
-  						<td><p><input type="text" name="validID" value="validID"> <input type="submit" name="submit" value="Validate"></p></td>
-					</form>
-				{% endif%}
-			</tr>
-		</table>
-	{% endif %}
+{% if data %}
+<br><br><center>
+  <table class="table">
+    <tr>
+      <td><h1>Cache Name: </h1></td>
+      <td><h1>{{data["name"]}}</h1></td>
+    </tr>
+    <tr>
+      <td><h2>Lat: {{data["lat"]}}</h2></td>
+      <td><h2>Lon: {{data["lon"]}}</h2></td>	
+    </tr>
+    <tr>
+      <td><p>Cache Type: </p></td>
+      <td><p>{{data["type"]}}</p></td>
+    </tr>
+    <tr>
+      <td>Description: </td>
+      <td><p>{{data["desc"]}}</p>.</td>
+    </tr>
+    <tr>
+      <td><p>Founder: </p></td>
+      <td><p>{{data["founder"]}}</p></td>
+    </tr>
+    <tr>
+      <td><p>Founded on: </p></td>
+      <td><p>{{data["date"]}}</p></td>
+    </tr>
+    {% if Error %}
+    <tr>
+      <td>Validation: </td>
+      {% if valid %}
+      <td><p style="color:green">{{Error}}</p></td>
+      {% else %}
+      <td><p style="color:red">{{Error}}</p></td>
+      {% endif %}
+    </tr>
+    {% endif %}
+    <tr>
+      <td><p>Current status: </td>
+      <td><p>{{data["stat"]}}</p></td>
+    </tr>
+    <tr>
+      <form method="POST">
+	<td><p>REPORT AS: </p></td>
+	<td>
+	  <select>
+  	    <option value="Lost" selected="selected">Lost</option>
+  	    <option value="Damaged">Damaged</option>
+	  </select>
+	  <input type="submit" style="color:red" name="status" value="status">
+	</td>
+      </form>
+    </tr>
+    <tr>
+      {% if valid %}
+      <td><a href='/movecache/{{CID}}/{{VID}}' class="btn btn-default">Relocate</a></td>
+      {% else %}
+      <form method="POST" action={{cacheID}} >
+  	<td><p>Found this cache? Validate it: </p></td>
+  	<td><p><input type="text" name="validID" value="validID"> <input type="submit" name="submit" value="Validate"></p></td>
+      </form>
+      {% endif%}
+    </tr>
+  </table>
+  {% endif %}
 	</br></br>
-
+	
 	<div class="col-lg-12">
-		<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+	  <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
 	</div>
-{% endblock %}
+	{% endblock %}
+	
