@@ -260,7 +260,7 @@ def moveCache(cacheID = 0, validID = 0):
 		lon = data["lon"]
 		newCord = geohash.geoHash(lat,lon,False)
 		if request.method=="GET":
-			return render_template("move.html", username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
+			return render_template("move.html",  VID = validID, CID = cacheID, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
 		if request.method=="POST":
 			lat = request.form["lat"]
 			lon = request.form["lon"]
@@ -269,7 +269,7 @@ def moveCache(cacheID = 0, validID = 0):
 			lon = cords[1]
 			if lat == 9000 or lon == 9000:
 				error = "INVALID COORDINATES"
-				return render_template("move.html", error = error, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
+				return render_template("move.html", VID = validID, CID = cacheID, error = error, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
 			try:
 				desc = request.form["desc"]
 			except:
