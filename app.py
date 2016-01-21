@@ -276,6 +276,7 @@ def moveCache(cacheID = 0, validID = 0):
 				desc = data["desc"]
 			status = 1
 			utils.updateCache(cacheID, lat, lon, data["type"], data["name"], desc, status)
+			return render_template("move.html", VID = validID, CID = cacheID, username = session["user"], data = data, lat = lat, lon = lon)
 			
 @app.route("/about", methods=["GET","POST"])
 def about():
