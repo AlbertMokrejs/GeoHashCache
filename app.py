@@ -150,7 +150,7 @@ def cacheProfile( uid = 0):
         			stat = 2
         		if stat == "Damaged":
         			stat = 3
-        		if stat == "Recovered"
+        		if stat == "Recovered":
         			stat = 0
         		data = utils.getCache( uid )
         		utils.updateCache(uid, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
