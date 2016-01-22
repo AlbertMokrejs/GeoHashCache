@@ -237,6 +237,7 @@ def userProfiles(user = 0):
 	if not str(user).isdigit():
 		user = utils.findUserID(user)
 	data = utils.getProfile(user)
+	print data
 	if len(data) > 0 and len(data[0]) > 0 and data[0][0] == "ERRORCODE":
 		Error = "Invalid User Account"
 		return render_template("user.html", user = user, Error = Error, Username = session["user"])
@@ -246,7 +247,7 @@ def userProfiles(user = 0):
 @app.route("/movecache/<cacheID>/<validID>", methods=["GET","POST"])
 def moveCache(cacheID = 0, validID = 0):
 	if not utils.validateCache(int(cacheID), int(validID)):
-		return redirect("/home")
+		return redirect("/validatecache/" + cacheID + "/" + validID)
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/movecache/%s/%s" % (cacheID, validID)
 		return redirect("/login")
@@ -261,17 +262,20 @@ def moveCache(cacheID = 0, validID = 0):
 			lat = request.form["lat"]
 			lon = request.form["lon"]
 			cords = utils.validCoord(lat,lon)
+			print "STEP 1"
 			lat = cords[0]
 			lon = cords[1]
 			if lat == 9000 or lon == 9000:
 				error = "INVALID COORDINATES"
 				return render_template("move.html", VID = validID, CID = cacheID, error = error, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
+			print "STEP 2"
 			try:
 				desc = request.form["desc"]
 			except:
 				desc = data["desc"]
 			status = 1
 			utils.updateCache(cacheID, lat, lon, data["type"], data["name"], desc, status)
+			print "STEP 3"
 			return render_template("move.html", VID = validID, CID = cacheID, username = session["user"], data = data, lat = lat, lon = lon)
 			
 @app.route("/about", methods=["GET","POST"])
