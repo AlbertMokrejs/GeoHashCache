@@ -230,7 +230,7 @@ def localCache():
 	LocList = []
 	for r in data:
 		LocList.append(['<a href="/validatecache/' + str(r[1]) +'/0">' + str(r[0][0]) + '</a>', r[0][1], r[0][2]])
-	return render_template("find.html", LocList = LocList, Username = session["user"], Lon = latitude, Lat = longitude)
+	return render_template("find.html", LocList = LocList, Username = session["user"], Lon = float(latitude), Lat = float(longitude))
 
 @app.route("/user/<user>")
 def userProfiles(user = 0):
