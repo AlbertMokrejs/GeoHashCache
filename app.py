@@ -123,17 +123,11 @@ def foundCache():
 			Description = request.form['Desc']
 			Name = request.form["Name"]
 			BODGE = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
-			print sys.exc_info()[0]
-			print BODGE
 			IMG = utils.makeQR(BODGE[0],BODGE[1])[0]
-			print IMG
 			validID = BODGE[1]
-			print validID
-			print sys.exc_info()[0]
 			return render_template("found.html", name = Name, IMG = IMG, validID = validID, Username = session["user"])
 		except:
 			e = sys.exc_info()[0]
-			print e
 			return render_template("found.html", Error = "Please Fill Out The Form Completely", Username = session["user"])
 			
 @app.route("/cache/<uid>",methods=["GET","POST"])
@@ -156,6 +150,8 @@ def cacheProfile( uid = 0):
         			stat = 2
         		if stat == "Damaged":
         			stat = 3
+        		if stat == "Recovered"
+        			stat = 0
         		data = utils.getCache( uid )
         		utils.updateCache(uid, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
         		data = utils.getCache( uid )
