@@ -48,7 +48,7 @@
       <td><p>{{data["stat"]}}</p></td>
     </tr>
     <tr>
-      <form method="POST">
+      <form method="POST" action={{cacheID}}>
 	<td><p>REPORT AS: </p></td>
 	<td>
 	  <select>
@@ -63,7 +63,7 @@
       {% if valid %}
       <td><a href='/movecache/{{CID}}/{{VID}}' class="btn btn-default">Relocate</a></td>
       {% else %}
-      <form method="POST" action={{cacheID}} >
+      <form method="POST" action={{cacheID}}>
   	<td><p>Found this cache? Validate it: </p></td>
   	<td><p><input type="text" name="validID" value="validID"> <input type="submit" name="submit" value="Validate"></p></td>
       </form>
