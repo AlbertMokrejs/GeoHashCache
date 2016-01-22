@@ -241,7 +241,7 @@ def userProfiles(user = 0):
 		Error = "Invalid User Account"
 		return render_template("user.html", user = user, Error = Error, Username = session["user"])
 	else:
-		return render_template("user.html", user = user, Data = Data, Username = session["user"])
+		return render_template("user.html", user = user, Data = data, Username = session["user"])
 		
 @app.route("/movecache/<cacheID>/<validID>", methods=["GET","POST"])
 def moveCache(cacheID = 0, validID = 0):
