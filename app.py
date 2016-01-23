@@ -178,15 +178,16 @@ def cache(cacheID = 0, validID = 0):
 			stat = 3
 		if "Lost" in request.form.keys():
 			stat = 2
-		print stat
+		if "Normal" in request.form.keys():
+			stat = 0
 		data = utils.getCache(cacheID)
-		print data
 		utils.updateCache(cacheID, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
 		if "Comment" in request.form.keys():
 			Comment =request.form["Comment"]
 			if not ("user" in session.keys() and session["user"] != ""):
 				session["redir"] = "/validatecache/%s/%s" % (cacheID, validID)
 				return redirect("/login")
+			#CommentsHaveBeenPostponed
 	result = utils.validateCache(int(cacheID), int(validID))
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
