@@ -52,18 +52,19 @@
 	<td><p>REPORT AS: </p></td>
 	<td>
 	  <select>
-  	    <option value="Lost" selected="selected">Lost</option>
+  	    <option value="Normal" selected="selected">Normal</option>
   	    <option value="Damaged">Damaged</option>
+  	    <option value="Lost">Lost</option>
 	  </select>
-	  <input type="submit" style="color:red" name="status" value="status">
+	  <input type="submit" style="color:red" name="submit" value="status">
 	</td>
-      </form>
+      
     </tr>
     <tr>
       {% if valid %}
       <td><a href='/movecache/{{CID}}/{{VID}}' class="btn btn-default">Relocate</a></td>
       {% else %}
-      <form method="POST" action={{cacheID}}>
+      
   	<td><p>Found this cache? Validate it: </p></td>
   	<td><p><input type="text" name="validID" value="validID"> <input type="submit" name="submit" value="Validate"></p></td>
       </form>
