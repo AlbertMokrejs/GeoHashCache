@@ -10,7 +10,7 @@ import generateDB
 import utils
 import geohash
 
-generateDB.checkGenerate("Pre-Alpha 1.02")
+generateDB.checkGenerate("Pre-Alpha 1.03")
 app = Flask(__name__)
 
 @app.route("/")
@@ -129,14 +129,9 @@ def foundCache():
 			Name = request.form["Name"]
 			BODGE = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
 			IMG = utils.makeQR(BODGE[0],BODGE[1])[0]
-			print "1"
 			validID = BODGE[1]
-			print "2"
 			data = utils.getCache(BODGE[0])
-			print "3"
 			utils.appendProfile(session["uid"],[[data["name"],data["lat"],data["lon"]]])
-			print "4"
-			print "5"
 			return render_template("found.html", name = Name, IMG = IMG, validID = validID, Username = session["user"])
 		except:
 			e = sys.exc_info()[0]
@@ -183,7 +178,6 @@ def cacheProfile( uid = 0):
 @app.route("/validatecache/<cacheID>/<validID>", methods=["GET","POST"])
 def cache(cacheID = 0, validID = 0):
 	if request.method=="POST":
-		print request.form
 		if "validID" in request.form.keys():
 			validID=request.form["validID"]
 		stat = 0
@@ -193,7 +187,6 @@ def cache(cacheID = 0, validID = 0):
 			stat = 2
 		if "Normal" in request.form.keys():
 			stat = 0
-		print stat
 		data = utils.getCache(cacheID)
 		utils.updateCache(cacheID, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
 		if "Comment" in request.form.keys():
@@ -256,7 +249,6 @@ def userProfiles(user = 0):
 	if not str(user).isdigit():
 		user = utils.findUserID(user)
 	data = utils.getProfile(user)
-	print data
 	if len(data) > 0 and len(data[0]) > 0 and data[0][0] == "ERRORCODE":
 		Error = "Invalid User Account"
 		return render_template("user.html", user = user, Error = Error, Username = session["user"])
@@ -278,7 +270,6 @@ def moveCache(cacheID = 0, validID = 0):
 		if request.method=="GET":
 			return render_template("move.html",  VID = validID, CID = cacheID, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
 		if request.method=="POST":
-			print request.form
 			try:
 				lat = float(request.form["Latitude"])
 				lon = float(request.form["Longitude"])
