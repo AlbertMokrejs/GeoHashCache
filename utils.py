@@ -247,7 +247,7 @@ def Comment(Parentid, Content, Author):
 #Input: Cache ID and a valid ID
 #Output: QR Server https link to said cache
 def makeQR(cacheID,validID):
-    return ["https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=http://geohashcache.chickenkiller.com:8000/validateCache/" + str(cacheID) + "/" + str(validID),validID]
+    return ["https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=http://geohashcache.chickenkiller.com:8000/validateCache/" + str(cacheID) + "/" + str(validID),validID,"http://geohashcache.chickenkiller.com:8000/validateCache/" + str(cacheID) + "/" + str(validID)]
 
 #Finds local caches near a certain global location
 
