@@ -128,12 +128,14 @@ def foundCache():
 			Description = request.form['Desc']
 			Name = request.form["Name"]
 			BODGE = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
-			IMG = utils.makeQR(BODGE[0],BODGE[1])[0]
+			IMG = utils.makeQR(BODGE[0],BODGE[1])
+			alink = ING[2]
+			IMG = IMG[0]
 			validID = BODGE[1]
 			data = utils.getCache(BODGE[0])
 			utils.appendProfile(session["uid"],[[data["name"],data["lat"],data["lon"]]])
 			utils.collectCache(cacheID,data["founder"],session["user"])
-			return render_template("found.html", name = Name, IMG = IMG, validID = validID, Username = session["user"])
+			return render_template("found.html", name = Name, IMG = IMG, validID = validID, alink = alink, Username = session["user"])
 		except:
 			e = sys.exc_info()[0]
 			return render_template("found.html", Error = "Please Fill Out The Form Completely", Username = session["user"])
