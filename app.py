@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from random import randint
 from geodata import get_geodata
 from collections import OrderedDict
+from werkzeug.contrib.fixers import ProxyFix
 import sqlite3
 import sys
 import urllib2
@@ -301,7 +302,8 @@ def donation():
 @app.route("/help", methods=["GET","POST"])
 def helper():
 	return render_template("help.html", username = session["user"])
-	
+
+app.wsgi_app = ProxyFix(app.wsgi_app)
 	
 if (__name__ == "__main__"):
         app.debug = False
