@@ -2,6 +2,11 @@ from json import loads
 from re import compile, VERBOSE
 from urllib import urlopen
 
+
+#Code adapted from:
+# 
+#https://realpython.com/blog/python/python-web-applications-with-flask-part-ii/
+
 FREE_GEOIP_URL = "http://freegeoip.net/json/{}"
 VALID_IP = compile(r"""
 \b
@@ -12,7 +17,8 @@ VALID_IP = compile(r"""
 \b
 """, VERBOSE)
 
-
+#Input: IP Address
+#Returns the Longitude and Latitude data for the IP address
 def get_geodata(ip):
     """
     Search for geolocation information using http://freegeoip.net/
