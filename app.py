@@ -171,6 +171,7 @@ def cacheProfile( uid = 0):
 @app.route("/validatecache/<cacheID>/<validID>", methods=["GET","POST"])
 def cache(cacheID = 0, validID = 0):
 	if request.method=="POST":
+		print request.form
 		if "validID" in request.form.keys():
 			validID=request.form["validID"]
 		stat = 0
@@ -265,6 +266,7 @@ def moveCache(cacheID = 0, validID = 0):
 		if request.method=="GET":
 			return render_template("move.html",  VID = validID, CID = cacheID, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
 		if request.method=="POST":
+			print request.form
 			try:
 				lat = float(request.form["Latitude"])
 				lon = float(request.form["Longitude"])
