@@ -248,6 +248,7 @@ def userProfiles(user = 0):
 		user = utils.findUserID(user)
 	data = utils.getProfile(user)
 	print data
+	data = list(set(data))
 	if len(data) > 0 and len(data[0]) > 0 and data[0][0] == "ERRORCODE":
 		Error = "Invalid User Account"
 		return render_template("user.html", user = user, Error = Error, Username = session["user"])
@@ -294,6 +295,13 @@ def moveCache(cacheID = 0, validID = 0):
 def about():
 	return render_template("about.html", username = session["user"])
 		
+@app.route("/about", methods=["GET","POST"])
+def donation():
+	return render_template("donate.html", username = session["user"])
+	
+@app.route("/about", methods=["GET","POST"])
+def helper():
+	return render_template("help.html", username = session["user"])
 	
 	
         
