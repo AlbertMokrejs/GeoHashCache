@@ -11,8 +11,10 @@ import generateDB
 import utils
 import geohash
 
+#Checks the current database version and makes updates as needed
 generateDB.checkGenerate("Pre-Alpha 1.04")
 app = Flask(__name__)
+
 
 @app.route("/")
 @app.route("/home")
