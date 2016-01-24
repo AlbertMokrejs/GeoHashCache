@@ -260,8 +260,8 @@ def moveCache(cacheID = 0, validID = 0):
 		if request.method=="GET":
 			return render_template("move.html",  VID = validID, CID = cacheID, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
 		if request.method=="POST":
-			lat = request.form["lat"]
-			lon = request.form["lon"]
+			lat = request.form["Latitude"]
+			lon = request.form["Longitude"]
 			cords = utils.validCoord(lat,lon)
 			print "STEP 1"
 			lat = cords[0]
@@ -271,7 +271,7 @@ def moveCache(cacheID = 0, validID = 0):
 				return render_template("move.html", VID = validID, CID = cacheID, error = error, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
 			print "STEP 2"
 			try:
-				desc = request.form["desc"]
+				desc = request.form["Desc"]
 			except:
 				desc = data["desc"]
 			status = 1
