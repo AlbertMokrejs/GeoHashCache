@@ -259,7 +259,7 @@ def cachesNear(lat, lon):
     q = """
     SELECT *
     FROM caches
-    WHERE (((caches.Latitude - %s) * (caches.Latitude - %s)) + ((caches.Longitude - %s) * (caches.Longitude - %s))) < 25.1;
+    WHERE (((caches.Latitude - %s) * (caches.Latitude - %s)) + ((caches.Longitude - %s) * (caches.Longitude - %s))) < 2025.5;
     """ % (lat, lat, lon, lon)
     result = c.execute(q)
     final = []
