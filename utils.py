@@ -11,7 +11,7 @@ import smtplib
 #Tests for the validity of the coordinates
 
 #Input: Latitude and Longitude
-#Output: Whether the coordinates are valid and returns 
+#Output: Whether the coordinates are valid and returns 9000 as an error-code if not.
 def validCoord(lat,lon):
     if(abs(lat) > 90 and abs(lon) > 90):
         print "Error: Invalid"
@@ -24,7 +24,7 @@ def validCoord(lat,lon):
 #Sends email receipt to the intended recipient
 
 #Input: Recipient email address, subject title, and body of email
-#Output: Sends email and, if applicable, error message.
+#Output: Sends email and, if applicable, error message. Always fails, will be fixed in a later version.
 def send_email(recipient, subject, body):
     user = "GeoHashCache@gmail.com"
     pwd = "NuclearPotato"
@@ -47,7 +47,7 @@ def send_email(recipient, subject, body):
 #Congratulations message
 
 #Input: User ID, intended user, and username
-#Output: Congratulatory message by team on the successful discovery of user's GeoCache
+#Output: Congratulatory message by team on the successful discovery of user's GeoCache.
 def collectCache(uid,user,username):
     dataU = findUserData(user)
     dataC = getCache(uid)
@@ -60,7 +60,7 @@ def collectCache(uid,user,username):
 #Login authentication into database of GeoCaches and user accounts
 
 #Input: Login credentials
-#Output: Boolean value indicating success and, if true, account information
+#Output: Boolean value indicating success and, if true, account information (user# and user email).
 def authenticate(username,password):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -113,8 +113,8 @@ def findUserID(username):
 
 #Accessing actual user data
 
-#Input: Username
-#Output: Relevant user data under username
+#Input: UserID
+#Output: Relevant user data under username.
 def findUserData(username):
     UID = findUserID(username)
     conn = sqlite3.connect("GeoHashCache.db")
@@ -131,7 +131,7 @@ def findUserData(username):
 #Updating overall cache data in database
 
 #Input: Cache ID, latitude, longitude, name, description, and status
-#Ouput: None. Updates database
+#Ouput: None. Updates database to override a moved cache. Not all caches will need to be moved.
 def updateCache(cacheID, lat, lon, Type, name, desc, stat):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
@@ -147,8 +147,8 @@ def updateCache(cacheID, lat, lon, Type, name, desc, stat):
 
 #Generate coordinates based on cache ID in database
 
-#Input: Cache ID and type of cache
-#Output: Information relevant to cache
+#Input: Cache ID and type of coordinates.
+#Output: A set of suggested coordinates to move the cache to.
 def genNewCoord(cacheID,small):
     conn = sqlite3.connect("GeoHashCache.db")
     c = conn.cursor()
