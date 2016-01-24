@@ -128,14 +128,16 @@ def foundCache():
 			Description = request.form['Desc']
 			Name = request.form["Name"]
 			BODGE = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
-			IMG = utils.makeQR(BODGE[0],BODGE[1])
-			print IMG
-			IMG = IMG[0]
-			print IMG
+			IMG = utils.makeQR(BODGE[0],BODGE[1])[0]
+			print "1"
 			validID = BODGE[1]
+			print "2"
 			data = utils.getCache(BODGE[0])
+			print "3"
 			utils.appendProfile(session["uid"],[[data["name"],data["lat"],data["lon"]]])
+			print "4"
 			utils.collectCache(cacheID,data["founder"],session["user"])
+			print "5"
 			return render_template("found.html", name = Name, IMG = IMG, validID = validID, Username = session["user"])
 		except:
 			e = sys.exc_info()[0]
