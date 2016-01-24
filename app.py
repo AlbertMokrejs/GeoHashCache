@@ -299,11 +299,11 @@ def moveCache(cacheID = 0, validID = 0):
 def about():
 	return render_template("about.html", username = session["user"])
 		
-@app.route("/about", methods=["GET","POST"])
+@app.route("/donation", methods=["GET","POST"])
 def donation():
 	return render_template("donate.html", username = session["user"])
 	
-@app.route("/about", methods=["GET","POST"])
+@app.route("/help", methods=["GET","POST"])
 def helper():
 	return render_template("help.html", username = session["user"])
 	
@@ -311,6 +311,6 @@ def helper():
         
 
 if (__name__ == "__main__"):
-        app.debug = True
+        app.debug = False
         app.secret_key = "app.secret_key"
-        app.run(host='0.0.0.0', port=8000)
+        app.run(host='0.0.0.0')
