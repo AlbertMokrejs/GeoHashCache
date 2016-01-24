@@ -110,10 +110,14 @@ def logout():
 @app.route("/found",methods=["GET","POST"])
 def foundCache():
 	if request.method=="GET":
+		ip_address = request.access_route[0] 
+    		geodata = get_geodata(ip_address)
+    		latitude=geodata.get("latitude")
+        	longitude=geodata.get("longitude")
 		if not ("user" in session.keys() and session["user"] != ""):
 			session["redir"] = "/found"
 			return redirect("/login")
-		return render_template("found.html", Username = session["user"])
+		return render_template("found.html",latitude = latitude,longitude = longitude, Username = session["user"])
 	else:
 		try:
 			Founder = session["user"]
