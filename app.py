@@ -180,6 +180,7 @@ def cache(cacheID = 0, validID = 0):
 			stat = 2
 		if "Normal" in request.form.keys():
 			stat = 0
+		print stat
 		data = utils.getCache(cacheID)
 		utils.updateCache(cacheID, data["lat"], data["lon"], data["type"], data["name"], data["desc"], stat)
 		if "Comment" in request.form.keys():
@@ -188,6 +189,10 @@ def cache(cacheID = 0, validID = 0):
 				session["redir"] = "/validatecache/%s/%s" % (cacheID, validID)
 				return redirect("/login")
 			#CommentsHaveBeenPostponed
+	try:
+		validID = int(validID)
+	except:
+		validID = 0
 	result = utils.validateCache(int(cacheID), int(validID))
 	if not ("user" in session.keys() and session["user"] != ""):
 		session["redir"] = "/validateCache/" + cacheID + "/" + validID
@@ -282,7 +287,7 @@ def moveCache(cacheID = 0, validID = 0):
 			
 @app.route("/about", methods=["GET","POST"])
 def about():
-	return render_templace("about.html", username = session["user"])
+	return render_template("about.html", username = session["user"])
 		
 	
 	
