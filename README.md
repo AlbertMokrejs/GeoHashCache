@@ -15,10 +15,10 @@ Geohashing Augmented Geocaching
 * 1/07: **X** Google Maps integration for nearby caches
 * 1/09: **X** Work on QR-code compabatibility/Validating caches
 * 1/10: **X** Enable user profiles + Upgrade login system
-* 1/12: Add comments to caches, work on reporting system.
+* 1/12: **Removed** Add comments to caches, work on reporting system.
 * 1/14: **X** Add emails to user profiles/registering: add email notifications.
-* 1/16: Stress Testing.
-* 1/18: Fix MISC bugs.
+* 1/16: **X** Stress Testing.
+* 1/18: **X** Fix MISC bugs.
 
 ## General Proposal:
 Geocaching usually refers to the internet "sport" of venturing out into the world in search of objects (called "Caches") hidden by other geogachers. An example of this is the infamous Cicada 3301 mystery.  The clues to finding these are usually a set of vague GPS coordinates as well as some sort of riddle, puzzle, map or challenge. These can vary from finding a particular tree to look under, to hacking a simulated wifi-network to get the actual set of coordinates. However, there's a finite number of unmoving caches in traditional geocaching, which means dedicated geocachers can potentially find *every* cache in their area which would leave them with nothing to do.
