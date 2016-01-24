@@ -253,7 +253,6 @@ def userProfiles(user = 0):
 		user = utils.findUserID(user)
 	data = utils.getProfile(user)
 	print data
-	data = list(OrderedDict.fromkeys(data))
 	if len(data) > 0 and len(data[0]) > 0 and data[0][0] == "ERRORCODE":
 		Error = "Invalid User Account"
 		return render_template("user.html", user = user, Error = Error, Username = session["user"])
