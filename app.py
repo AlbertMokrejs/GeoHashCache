@@ -296,7 +296,7 @@ def about():
 		
 @app.route("/donation", methods=["GET","POST"])
 def donation():
-	return render_template("donate.html", username = session["user"])
+	return render_template("donation.html", username = session["user"])
 	
 @app.route("/help", methods=["GET","POST"])
 def helper():
