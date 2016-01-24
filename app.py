@@ -130,7 +130,9 @@ def foundCache():
 			BODGE = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
 			IMG = utils.makeQR(BODGE[0],BODGE[1])
 			alink = IMG[2]
+			print IMG
 			IMG = IMG[0]
+			print IMG
 			validID = BODGE[1]
 			data = utils.getCache(BODGE[0])
 			utils.appendProfile(session["uid"],[[data["name"],data["lat"],data["lon"]]])
