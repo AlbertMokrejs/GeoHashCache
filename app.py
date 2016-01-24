@@ -136,7 +136,6 @@ def foundCache():
 			print "3"
 			utils.appendProfile(session["uid"],[[data["name"],data["lat"],data["lon"]]])
 			print "4"
-			utils.collectCache(cacheID,data["founder"],session["user"])
 			print "5"
 			return render_template("found.html", name = Name, IMG = IMG, validID = validID, Username = session["user"])
 		except:
