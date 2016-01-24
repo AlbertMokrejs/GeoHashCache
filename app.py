@@ -125,6 +125,9 @@ def foundCache():
 			BODGE = utils.makeNewCache(Latitude, Longitude, Type, Name, Description, Founder)
 			IMG = utils.makeQR(BODGE[0],BODGE[1])[0]
 			validID = BODGE[1]
+			data = utils.getCache(BODGE[0])
+			utils.appendProfile(session["uid"],[[data["name"],data["lat"],data["lon"]]])
+			utils.collectCache(cacheID,data["founder"],session["user"])
 			return render_template("found.html", name = Name, IMG = IMG, validID = validID, Username = session["user"])
 		except:
 			e = sys.exc_info()[0]
@@ -196,7 +199,7 @@ def cache(cacheID = 0, validID = 0):
 		validID = 0
 	result = utils.validateCache(int(cacheID), int(validID))
 	if not ("user" in session.keys() and session["user"] != ""):
-		session["redir"] = "/validateCache/" + cacheID + "/" + validID
+		session["redir"] = "/validateCache/" + str(cacheID) + "/" + str(validID)
 		return redirect("/login")
 	else:
 		if result:
@@ -211,7 +214,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", CID = cacheID, VID = validID, valid = True, cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = "Succesfully Validated", Username = session["user"])
+	  		return render_template("validatecache.html", CID = cacheID, VID = validID, valid = True, cacheID = "/validatecache/" + str(cacheID) + "/" + str(validID), data = data, Error = "Succesfully Validated", Username = session["user"])
 		else:	
 			data = utils.getCache(cacheID)
 			Error = "Failed To Validate"
@@ -225,7 +228,7 @@ def cache(cacheID = 0, validID = 0):
 				data["stat"] = "Lost"
 			if data["stat"] == 3:
 				data["stat"] = "Damaged"
-	  		return render_template("validatecache.html", CID = cacheID, VID = validID, valid = False, cacheID = "/validatecache/" + cacheID + "/" + validID, data = data, Error = Error, Username = session["user"])
+	  		return render_template("validatecache.html", CID = cacheID, VID = validID, valid = False, cacheID = "/validatecache/" + str(cacheID) + "/" + str(validID), data = data, Error = Error, Username = session["user"])
 
 @app.route("/find")
 def localCache():
