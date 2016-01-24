@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from random import randint
 from geodata import get_geodata
+from  more_itertools import unique_everseen
 import sqlite3
 import sys
 import urllib2
@@ -252,10 +253,7 @@ def userProfiles(user = 0):
 		user = utils.findUserID(user)
 	data = utils.getProfile(user)
 	print data
-	datas = set(data)
-	data = []
-	for r in datas:
-		data.append(r)
+	data = list(unique_everseen(data))
 	if len(data) > 0 and len(data[0]) > 0 and data[0][0] == "ERRORCODE":
 		Error = "Invalid User Account"
 		return render_template("user.html", user = user, Error = Error, Username = session["user"])
