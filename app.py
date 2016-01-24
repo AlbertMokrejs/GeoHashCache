@@ -260,24 +260,25 @@ def moveCache(cacheID = 0, validID = 0):
 		if request.method=="GET":
 			return render_template("move.html",  VID = validID, CID = cacheID, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
 		if request.method=="POST":
-			lat = request.form["Latitude"]
-			lon = request.form["Longitude"]
-			cords = utils.validCoord(lat,lon)
-			print "STEP 1"
-			lat = cords[0]
-			lon = cords[1]
-			if lat == 9000 or lon == 9000:
+			try:
+				lat = float(request.form["Latitude"])
+				lon = float(request.form["Longitude"])
+				cords = utils.validCoord(lat,lon)
+				lat = cords[0]
+				lon = cords[1]
+				if lat == 9000 or lon == 9000:
+					error = "INVALID COORDINATES"
+					return render_template("move.html", VID = validID, CID = cacheID, error = error, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
+				try:
+					desc = request.form["Desc"]
+				except:
+					desc = data["desc"]
+				status = 1
+				utils.updateCache(cacheID, lat, lon, data["type"], data["name"], desc, status)
+				return render_template("move.html", VID = validID, CID = cacheID, username = session["user"], data = data, lat = lat, lon = lon)
+			except:
 				error = "INVALID COORDINATES"
 				return render_template("move.html", VID = validID, CID = cacheID, error = error, username = session["user"], data = data, lat = newCord[0], lon = newCord[1])
-			print "STEP 2"
-			try:
-				desc = request.form["Desc"]
-			except:
-				desc = data["desc"]
-			status = 1
-			utils.updateCache(cacheID, lat, lon, data["type"], data["name"], desc, status)
-			print "STEP 3"
-			return render_template("move.html", VID = validID, CID = cacheID, username = session["user"], data = data, lat = lat, lon = lon)
 			
 @app.route("/about", methods=["GET","POST"])
 def about():
