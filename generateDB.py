@@ -22,7 +22,7 @@ def checkGenerate(version):
                """DROP TABLE GeoHashCache.comments;""",
                """DROP TABLE GeoHashCache.cacheIDs;""",
                """DROP TABLE GeoHashCache.version;""",]
-            for z in list:
+            for z in List:
                curs.execute(z)
                connect.commit()
    if not x:
