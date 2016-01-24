@@ -17,17 +17,7 @@ def checkGenerate(version):
          if r[0] != version:
             print "INVALID VERSION. \n WIPING AND UPDATING."
             x = False
-            List = ["""DROP TABLE GeoHashCache.login;""",
-               """DROP TABLE GeoHashCache.caches;""",
-               """DROP TABLE GeoHashCache.comments;""",
-               """DROP TABLE GeoHashCache.cacheIDs;""",
-               """DROP TABLE GeoHashCache.version;""",]
-            for z in List:
-               try:
-                  curs.execute(z)
-                  connect.commit()
-               except:
-                  print "shrugs"
+            os.remove("GeoHashCache.db")
    if not x:
       #Makes tables.
       connect = sqlite3.connect("GeoHashCache.db")
