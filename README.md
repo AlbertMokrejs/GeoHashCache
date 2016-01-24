@@ -1,5 +1,5 @@
 # GeoHashCache
-Geohashing Augmented Geocaching
+[Geohashing Augmented Geocaching](http://geohashcache.chickenkiller.com:5000/)
 
 ## Contributors' Information:
 
