@@ -23,8 +23,11 @@ def checkGenerate(version):
                """DROP TABLE GeoHashCache.cacheIDs;""",
                """DROP TABLE GeoHashCache.version;""",]
             for z in List:
-               curs.execute(z)
-               connect.commit()
+               try:
+                  curs.execute(z)
+                  connect.commit()
+               except:
+                  print "shrugs"
    if not x:
       #Makes tables.
       connect = sqlite3.connect("GeoHashCache.db")
