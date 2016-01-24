@@ -10,7 +10,7 @@ import generateDB
 import utils
 import geohash
 
-generateDB.checkGenerate("Pre-Alpha 1.01")
+generateDB.checkGenerate("Pre-Alpha 1.02")
 app = Flask(__name__)
 
 @app.route("/")
@@ -308,8 +308,6 @@ def helper():
 	return render_template("help.html", username = session["user"])
 	
 	
-        
-
 if (__name__ == "__main__"):
         app.debug = False
         app.secret_key = "app.secret_key"
