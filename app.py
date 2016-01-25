@@ -308,6 +308,4 @@ def helper():
 app.wsgi_app = ProxyFix(app.wsgi_app)
 	
 if (__name__ == "__main__"):
-        app.debug = False
-        app.secret_key = "app.secret_key"
         app.run(host='0.0.0.0')
