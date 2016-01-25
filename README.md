@@ -56,4 +56,4 @@ Therefore, we propose a geohash augmented form of geocaching. Geohashing uses a 
 
 ### Video Overview
 
-![Video] (https://youtu.be/aIoif1YM8Eg)
+![Video] (https://www.youtube.com/watch?v=aIoif1YM8Eg&feature=youtu.be)
