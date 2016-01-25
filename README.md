@@ -5,7 +5,7 @@
 
 * Make sure SQLITE3 is installed
 * Run app.py, which will check databases before running
-* Use normally via http://geohashcache.chickenkiller.com:5000/
+* Use normally via http://geohashcache.chickenkiller.com:8000/
 
 
 ## Contributors' Information:
