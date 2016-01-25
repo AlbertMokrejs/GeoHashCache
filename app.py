@@ -306,6 +306,8 @@ def helper():
 	return render_template("help.html", username = session["user"])
 
 app.wsgi_app = ProxyFix(app.wsgi_app)
-	
+
+
+app.secret_key = "app.secret_key"	
 if (__name__ == "__main__"):
         app.run(host='0.0.0.0')
